@@ -1,0 +1,25 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="编织工具">
+  <div class="container-custom py-12">
+    <h1 class="text-3xl font-bold mb-2">编织工具</h1>
+    <p class="text-muted-foreground mb-8">实用的编织计算器和辅助工具</p>
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <a
+        href={`${import.meta.env.BASE_URL}/tools/raglan-calculator`}
+        class="group block rounded-xl border border-border p-6 transition-all hover:border-primary hover:shadow-md"
+      >
+        <div class="text-3xl mb-3">🧶</div>
+        <h2 class="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
+          魔法插肩毛衣计算器
+        </h2>
+        <p class="text-sm text-muted-foreground">
+          从领口往下织的定制尺寸插肩毛衣计算工具，支持从婴儿到成人的所有尺寸。
+        </p>
+      </a>
+    </div>
+  </div>
+</BaseLayout>

@@ -12,6 +12,7 @@ export const LOCALE = ["zh-CN"];
 export const NAV_ITEMS = [
   { title: "首页", href: "/" },
   { title: "教程", href: "/posts" },
+  { title: "编织工具", href: "/tools" },
   { title: "标签", href: "/tags" },
   { title: "关于", href: "/about" },
 ];
