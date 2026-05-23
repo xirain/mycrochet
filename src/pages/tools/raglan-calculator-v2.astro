@@ -2,637 +2,1134 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="魔法插肩毛衣计算器" description="从领口往下织的定制尺寸插肩毛衣计算工具">
-  <!-- Hero -->
-  <div class="bg-gradient-to-br from-primary/10 via-accent/5 to-transparent border-b border-border">
-    <div class="container-custom py-10 sm:py-14 text-center">
-      <p class="text-4xl mb-3">🧶</p>
-      <h1 class="text-2xl sm:text-3xl font-bold tracking-tight mb-2">魔法插肩毛衣计算器</h1>
-      <p class="text-muted-foreground">从领口往下织的定制尺寸插肩毛衣 &middot; 适合所有尺码</p>
-    </div>
-  </div>
-
-  <div class="container-custom py-8">
-    <!-- Tabs -->
-    <div class="flex gap-1 mb-8 border-b border-border no-print" id="rc-tabs">
-      <button class="rc-tab active" data-tab="calculator">计算器</button>
-      <button class="rc-tab" data-tab="guide">织法说明</button>
-      <button class="rc-tab" data-tab="variations">款式变化</button>
-    </div>
-
-    <!-- ==================== Tab: 计算器 ==================== -->
-    <div id="calculator" class="rc-panel active">
-
-      <!-- Step 1: 密度 -->
-      <div class="flex justify-center mb-5">
-        <img src="/images/celiang.png" alt="样片测量示意" class="max-w-full h-auto rounded-lg shadow-sm" style="max-height:300px" />
-      </div>
-      <section class="rc-section">
-        <h2 class="rc-h2">
-          <span class="rc-step">1</span>
-          测量密度
-        </h2>
-        <p class="text-sm text-muted-foreground mb-4">起26针织样片，中间20针织花样，水洗定型后测量宽度。</p>
-        <div class="grid sm:grid-cols-2 gap-5">
-          <div>
-            <label for="swatchWidth" class="rc-label">样片宽度（20针的宽度）</label>
-            <div class="relative">
-              <input type="number" id="swatchWidth" step="0.1" min="1" placeholder="例如：10"
-                class="rc-input w-full" />
-              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">cm</span>
-            </div>
-          </div>
-          <div class="flex items-end">
-            <div class="w-full rounded-xl bg-primary/5 border border-primary/20 p-4 text-center">
-              <div class="text-xs text-muted-foreground mb-1">编织密度</div>
-              <span class="text-2xl font-bold text-primary" id="gaugeResult">--</span>
-              <span class="text-sm text-muted-foreground ml-1">针/cm</span>
-            </div>
-          </div>
+<BaseLayout
+    title="魔法插肩毛衣计算器"
+    description="从领口往下织的定制尺寸插肩毛衣计算工具"
+>
+    <!-- Hero -->
+    <div
+        class="bg-gradient-to-br from-primary/10 via-accent/5 to-transparent border-b border-border"
+    >
+        <div class="container-custom py-10 sm:py-14 text-center">
+            <p class="text-4xl mb-3">🧶</p>
+            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight mb-2">
+                魔法插肩毛衣计算器
+            </h1>
+            <p class="text-muted-foreground">
+                从领口往下织的定制尺寸插肩毛衣 &middot; 适合所有尺码
+            </p>
         </div>
-      </section>
-
-      <!-- Step 2: 选尺码 / 输入测量 -->
-      <section class="rc-section">
-        <h2 class="rc-h2">
-          <span class="rc-step">2</span>
-          选择尺码
-        </h2>
-        <p class="text-sm text-muted-foreground mb-4">点选标准尺码快速填入，也可以直接在下方手动输入。</p>
-
-        <!-- 尺码选择器 -->
-        <div class="mb-5">
-          <div class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">儿童</div>
-          <div class="flex flex-wrap gap-2 mb-3" id="size-kids">
-            <button class="rc-size" data-neck="23" data-raglan="18" data-sleeve="20" data-cuff="13" data-body="15" data-chest="53" data-yarn-bulky="293" data-yarn-worsted="338" data-yarn-dk="411">
-              <span class="rc-size-name">童2</span><span class="rc-size-chest">53cm</span>
-            </button>
-            <button class="rc-size" data-neck="24" data-raglan="20" data-sleeve="23" data-cuff="14" data-body="18" data-chest="58" data-yarn-bulky="384" data-yarn-worsted="457" data-yarn-dk="549">
-              <span class="rc-size-name">童4</span><span class="rc-size-chest">58cm</span>
-            </button>
-            <button class="rc-size" data-neck="25" data-raglan="22" data-sleeve="25" data-cuff="14" data-body="20" data-chest="65" data-yarn-bulky="466" data-yarn-worsted="567" data-yarn-dk="686">
-              <span class="rc-size-name">童6</span><span class="rc-size-chest">65cm</span>
-            </button>
-            <button class="rc-size" data-neck="28" data-raglan="23" data-sleeve="29" data-cuff="15" data-body="24" data-chest="69" data-yarn-bulky="567" data-yarn-worsted="686" data-yarn-dk="823">
-              <span class="rc-size-name">童8</span><span class="rc-size-chest">69cm</span>
-            </button>
-            <button class="rc-size" data-neck="30" data-raglan="25" data-sleeve="33" data-cuff="15" data-body="28" data-chest="71" data-yarn-bulky="604" data-yarn-worsted="732" data-yarn-dk="878">
-              <span class="rc-size-name">童10</span><span class="rc-size-chest">71cm</span>
-            </button>
-            <button class="rc-size" data-neck="33" data-raglan="27" data-sleeve="37" data-cuff="18" data-body="33" data-chest="76" data-yarn-bulky="722" data-yarn-worsted="869" data-yarn-dk="1042">
-              <span class="rc-size-name">童12</span><span class="rc-size-chest">76cm</span>
-            </button>
-          </div>
-
-          <div class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">成人</div>
-          <div class="flex flex-wrap gap-2" id="size-adults">
-            <button class="rc-size" data-neck="34" data-raglan="28" data-sleeve="41" data-cuff="18" data-body="34" data-chest="81" data-yarn-bulky="759" data-yarn-worsted="914" data-yarn-dk="1097">
-              <span class="rc-size-name">32</span><span class="rc-size-chest">81cm</span>
-            </button>
-            <button class="rc-size" data-neck="36" data-raglan="29" data-sleeve="42" data-cuff="18" data-body="36" data-chest="86" data-yarn-bulky="832" data-yarn-worsted="1006" data-yarn-dk="1207">
-              <span class="rc-size-name">34</span><span class="rc-size-chest">86cm</span>
-            </button>
-            <button class="rc-size" data-neck="37" data-raglan="30" data-sleeve="43" data-cuff="19" data-body="37" data-chest="91" data-yarn-bulky="951" data-yarn-worsted="1143" data-yarn-dk="1372">
-              <span class="rc-size-name">36</span><span class="rc-size-chest">91cm</span>
-            </button>
-            <button class="rc-size" data-neck="38" data-raglan="33" data-sleeve="44" data-cuff="19" data-body="38" data-chest="97" data-yarn-bulky="988" data-yarn-worsted="1189" data-yarn-dk="1426">
-              <span class="rc-size-name">38</span><span class="rc-size-chest">97cm</span>
-            </button>
-            <button class="rc-size" data-neck="39" data-raglan="36" data-sleeve="46" data-cuff="20" data-body="39" data-chest="102" data-yarn-bulky="1024" data-yarn-worsted="1234" data-yarn-dk="1481">
-              <span class="rc-size-name">40</span><span class="rc-size-chest">102cm</span>
-            </button>
-            <button class="rc-size" data-neck="41" data-raglan="38" data-sleeve="47" data-cuff="20" data-body="41" data-chest="107" data-yarn-bulky="1097" data-yarn-worsted="1326" data-yarn-dk="1591">
-              <span class="rc-size-name">42</span><span class="rc-size-chest">107cm</span>
-            </button>
-            <button class="rc-size" data-neck="42" data-raglan="41" data-sleeve="48" data-cuff="22" data-body="42" data-chest="112" data-yarn-bulky="1143" data-yarn-worsted="1372" data-yarn-dk="1646">
-              <span class="rc-size-name">44</span><span class="rc-size-chest">112cm</span>
-            </button>
-            <button class="rc-size" data-neck="43" data-raglan="43" data-sleeve="50" data-cuff="22" data-body="43" data-chest="117" data-yarn-bulky="1180" data-yarn-worsted="1417" data-yarn-dk="1701">
-              <span class="rc-size-name">46</span><span class="rc-size-chest">117cm</span>
-            </button>
-            <button class="rc-size" data-neck="44" data-raglan="46" data-sleeve="51" data-cuff="22" data-body="44" data-chest="122" data-yarn-bulky="1253" data-yarn-worsted="1509" data-yarn-dk="1811">
-              <span class="rc-size-name">48</span><span class="rc-size-chest">122cm</span>
-            </button>
-            <button class="rc-size" data-neck="46" data-raglan="48" data-sleeve="52" data-cuff="23" data-body="46" data-chest="127" data-yarn-bulky="1280" data-yarn-worsted="1554" data-yarn-dk="1865">
-              <span class="rc-size-name">50</span><span class="rc-size-chest">127cm</span>
-            </button>
-            <button class="rc-size" data-neck="47" data-raglan="51" data-sleeve="53" data-cuff="24" data-body="47" data-chest="132" data-yarn-bulky="1372" data-yarn-worsted="1646" data-yarn-dk="1975">
-              <span class="rc-size-name">52</span><span class="rc-size-chest">132cm</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- 毛线用量（选中尺码后显示） -->
-        <div id="yarn-info" class="hidden mb-5 rounded-lg bg-primary/5 border border-primary/15 p-4">
-          <div class="flex items-center gap-2 mb-2">
-            <span class="text-sm font-semibold">毛线用量参考</span>
-            <span class="text-xs text-muted-foreground" id="yarn-size-label"></span>
-          </div>
-          <div class="grid grid-cols-3 gap-3 text-center text-sm">
-            <div>
-              <div class="font-bold text-primary" id="yarn-bulky">--</div>
-              <div class="text-xs text-muted-foreground">粗线 (m)</div>
-            </div>
-            <div>
-              <div class="font-bold text-primary" id="yarn-worsted">--</div>
-              <div class="text-xs text-muted-foreground">中粗 (m)</div>
-            </div>
-            <div>
-              <div class="font-bold text-primary" id="yarn-dk">--</div>
-              <div class="text-xs text-muted-foreground">细线 (m)</div>
-            </div>
-          </div>
-          <p class="text-xs text-muted-foreground mt-2">总是多买一团线，保留收据。</p>
-        </div>
-
-        <!-- 测量数据输入 -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-5">
-          <div>
-            <label for="neckCirc" class="rc-label">领围 <span class="font-normal text-muted-foreground">(cm)</span></label>
-            <input type="number" id="neckCirc" step="0.5" min="1" placeholder="36" class="rc-input w-full" />
-          </div>
-          <div>
-            <label for="raglanLength" class="rc-label">插肩长度 <span class="font-normal text-muted-foreground">(cm)</span></label>
-            <input type="number" id="raglanLength" step="0.5" min="1" placeholder="30" class="rc-input w-full" />
-          </div>
-          <div>
-            <label for="bodyLength" class="rc-label">身长 <span class="font-normal text-muted-foreground">(cm)</span></label>
-            <input type="number" id="bodyLength" step="0.5" min="1" placeholder="38" class="rc-input w-full" />
-          </div>
-          <div>
-            <label for="cuffCirc" class="rc-label">袖口周长 <span class="font-normal text-muted-foreground">(cm)</span></label>
-            <input type="number" id="cuffCirc" step="0.5" min="1" placeholder="19" class="rc-input w-full" />
-          </div>
-          <div>
-            <label for="sleeveLength" class="rc-label">袖长 <span class="font-normal text-muted-foreground">(cm)</span></label>
-            <input type="number" id="sleeveLength" step="0.5" min="1" placeholder="46" class="rc-input w-full" />
-          </div>
-        </div>
-        <p class="text-xs text-muted-foreground mt-3">领围=领口尺寸 &middot; 插肩=锁骨到腋下 &middot; 身长=腋下到下摆 &middot; 袖长=腋下到手腕</p>
-      </section>
-
-      <!-- Step 3: 计算结果 -->
-      <section class="rc-section" id="results-section">
-        <h2 class="rc-h2">
-          <span class="rc-step">3</span>
-          计算结果
-        </h2>
-
-        <!-- 领口针数 -->
-        <h3 class="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">领口分配</h3>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-          <div class="rc-metric">
-            <div class="rc-metric-value" id="totalNeck">--</div>
-            <div class="rc-metric-label">总针数</div>
-          </div>
-          <div class="rc-metric">
-            <div class="rc-metric-value" id="backStitches">--</div>
-            <div class="rc-metric-label">后片</div>
-          </div>
-          <div class="rc-metric">
-            <div class="rc-metric-value" id="sleeveStitches">--</div>
-            <div class="rc-metric-label">每个袖子</div>
-          </div>
-          <div class="rc-metric">
-            <div class="rc-metric-value" id="frontStitches">--</div>
-            <div class="rc-metric-label">前片</div>
-          </div>
-        </div>
-
-        <!-- 前片分解 -->
-        <h3 class="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">前片分解</h3>
-        <div class="grid grid-cols-3 gap-3 mb-6">
-          <div class="rc-metric rc-metric--sm">
-            <div class="rc-metric-value text-lg" id="leftFront">--</div>
-            <div class="rc-metric-label">左前</div>
-          </div>
-          <div class="rc-metric rc-metric--sm">
-            <div class="rc-metric-value text-lg" id="centerFront">--</div>
-            <div class="rc-metric-label">前中心</div>
-          </div>
-          <div class="rc-metric rc-metric--sm">
-            <div class="rc-metric-value text-lg" id="rightFront">--</div>
-            <div class="rc-metric-label">右前</div>
-          </div>
-        </div>
-
-        <!-- 其他 -->
-        <h3 class="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">其他数据</h3>
-        <div class="grid grid-cols-2 gap-3">
-          <div class="rc-metric rc-metric--sm">
-            <div class="rc-metric-value text-lg" id="cuffStitches">--</div>
-            <div class="rc-metric-label">袖口针数</div>
-          </div>
-          <div class="rc-metric rc-metric--sm">
-            <div class="rc-metric-value text-lg" id="underarmStitches">--</div>
-            <div class="rc-metric-label">腋下加针（2.5cm）</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Step 4: 起针顺序 -->
-      <section class="rc-section">
-        <h2 class="rc-h2">
-          <span class="rc-step">4</span>
-          起针顺序
-        </h2>
-        <p class="text-sm text-muted-foreground mb-4">按以下顺序依次起针，形成领口造型：</p>
-        <div class="rounded-xl border-2 border-dashed border-primary/30 bg-primary/5 p-5">
-          <div class="flex flex-wrap gap-2 justify-center items-center text-sm">
-            <span class="rc-chip rc-chip--stitch">1针</span>
-            <span class="rc-chip rc-chip--marker-a">记号A</span>
-            <span class="rc-chip rc-chip--stitch">1针(加)</span>
-            <span class="rc-chip rc-chip--marker-b">记号B</span>
-            <span class="rc-chip rc-chip--stitch" id="sleeve1CastOn">袖+2</span>
-            <span class="rc-chip rc-chip--marker-b">记号B</span>
-            <span class="rc-chip rc-chip--stitch" id="backCastOn">后片+2</span>
-            <span class="rc-chip rc-chip--marker-b">记号B</span>
-            <span class="rc-chip rc-chip--stitch" id="sleeve2CastOn">袖+2</span>
-            <span class="rc-chip rc-chip--marker-b">记号B</span>
-            <span class="rc-chip rc-chip--stitch">1针(加)</span>
-            <span class="rc-chip rc-chip--marker-a">记号A</span>
-            <span class="rc-chip rc-chip--stitch">1针</span>
-          </div>
-          <p class="text-center mt-4 font-semibold">
-            初始起针总数：<span class="text-primary text-lg" id="initialCastOn">--</span> 针
-          </p>
-        </div>
-        <div class="mt-4 rounded-lg bg-accent/10 border-l-4 border-accent p-4 text-sm">
-          <strong>注意：</strong>4个B记号分隔前片、袖子和后片。2个A记号追踪前片加针。来回织，在正面行每个B记号前后加针，同时在开头和结尾加针，直到所有前片针数加完。
-        </div>
-      </section>
-
-      <div class="text-center py-4 no-print">
-        <button onclick="window.print()" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity">
-          打印完整图样
-        </button>
-      </div>
     </div>
 
-    <!-- ==================== Tab: 织法说明 ==================== -->
-    <div id="guide" class="rc-panel">
-      <section class="rc-section">
-        <h2 class="rc-h2">所需工具</h2>
-        <div class="grid sm:grid-cols-2 gap-2">
-          <div class="rc-guide-item">所需用量的毛线（参考表格）</div>
-          <div class="rc-guide-item">环形针：40cm 和 48cm 各一副</div>
-          <div class="rc-guide-item">2个同色记号扣（记号A）</div>
-          <div class="rc-guide-item">4个另一色记号扣（记号B）</div>
-          <div class="rc-guide-item">软尺</div>
-          <div class="rc-guide-item">别线或针数固定器</div>
+    <div class="container-custom py-8">
+        <!-- Tabs -->
+        <div
+            class="flex gap-1 mb-8 border-b border-border no-print"
+            id="rc-tabs"
+        >
+            <button class="rc-tab active" data-tab="calculator">计算器</button>
+            <button class="rc-tab" data-tab="guide">织法说明</button>
+            <button class="rc-tab" data-tab="variations">款式变化</button>
         </div>
-      </section>
 
-      <section class="rc-section">
-        <h2 class="rc-h2">织领口</h2>
-        <p class="text-sm text-muted-foreground mb-3">领口起针是不完整的圆圈。来回织直到前片针数加完，然后合圈。</p>
-        <ol class="rc-steps-list">
-          <li>按计算器显示的顺序起针</li>
-          <li>来回织，在正面行每个B记号前后各加1针</li>
-          <li>同时，在每个正面行的开头和结尾各加1针</li>
-          <li>继续直到左前和右前的针数都加完</li>
-          <li>一次性加上前中心的针数</li>
-          <li>合圈，开始圈织</li>
-        </ol>
-      </section>
+        <!-- ==================== Tab: 计算器 ==================== -->
+        <div id="calculator" class="rc-panel active">
+            <!-- Step 1: 密度 -->
+            <div class="flex justify-center mb-5">
+                <img
+                    src="/mycrochet/images/celiang.png"
+                    alt="样片测量示意"
+                    class="max-w-full h-auto rounded-lg shadow-sm"
+                    style="max-height:300px"
+                />
+            </div>
+            <section class="rc-section">
+                <h2 class="rc-h2">
+                    <span class="rc-step">1</span>
+                    测量密度
+                </h2>
+                <p class="text-sm text-muted-foreground mb-4">
+                    起26针织样片，中间20针织花样，水洗定型后测量宽度。
+                </p>
+                <div class="grid sm:grid-cols-2 gap-5">
+                    <div>
+                        <label for="swatchWidth" class="rc-label"
+                            >样片宽度（20针的宽度）</label
+                        >
+                        <div class="relative">
+                            <input
+                                type="number"
+                                id="swatchWidth"
+                                step="0.1"
+                                min="1"
+                                placeholder="例如：10"
+                                class="rc-input w-full"
+                            />
+                            <span
+                                class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground"
+                                >cm</span
+                            >
+                        </div>
+                    </div>
+                    <div class="flex items-end">
+                        <div
+                            class="w-full rounded-xl bg-primary/5 border border-primary/20 p-4 text-center"
+                        >
+                            <div class="text-xs text-muted-foreground mb-1">
+                                编织密度
+                            </div>
+                            <span
+                                class="text-2xl font-bold text-primary"
+                                id="gaugeResult">--</span
+                            >
+                            <span class="text-sm text-muted-foreground ml-1"
+                                >针/cm</span
+                            >
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-      <section class="rc-section">
-        <h2 class="rc-h2">织身体</h2>
-        <ol class="rc-steps-list">
-          <li>圈织后第一圈取下A记号</li>
-          <li>继续织，每隔一圈在每个B记号前后加针</li>
-          <li>当插肩长度达到测量值时，把袖子针数穿到别线上</li>
-          <li>取下B记号</li>
-          <li>在每个腋下加 2.5cm 的针数</li>
-          <li>继续圈织直筒到想要的身长</li>
-          <li>收针前加罗纹或平面花样防止卷边</li>
-        </ol>
-        <div class="mt-3 rounded-lg bg-primary/5 border-l-4 border-primary p-4 text-sm">
-          <strong>身体造型：</strong>可以收腰、保持直筒、A字型或沙漏型，在「侧缝」位置加减针即可。
+            <!-- Step 2: 选尺码 / 输入测量 -->
+            <section class="rc-section">
+                <h2 class="rc-h2">
+                    <span class="rc-step">2</span>
+                    选择尺码
+                </h2>
+                <p class="text-sm text-muted-foreground mb-4">
+                    点选标准尺码快速填入，也可以直接在下方手动输入。
+                </p>
+
+                <!-- 尺码选择器 -->
+                <div class="mb-5">
+                    <div
+                        class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2"
+                    >
+                        儿童
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-3" id="size-kids">
+                        <button
+                            class="rc-size"
+                            data-neck="23"
+                            data-raglan="18"
+                            data-sleeve="20"
+                            data-cuff="13"
+                            data-body="15"
+                            data-chest="53"
+                            data-yarn-bulky="293"
+                            data-yarn-worsted="338"
+                            data-yarn-dk="411"
+                        >
+                            <span class="rc-size-name">童2</span><span
+                                class="rc-size-chest">53cm</span
+                            >
+                        </button>
+                        <button
+                            class="rc-size"
+                            data-neck="24"
+                            data-raglan="20"
+                            data-sleeve="23"
+                            data-cuff="14"
+                            data-body="18"
+                            data-chest="58"
+                            data-yarn-bulky="384"
+                            data-yarn-worsted="457"
+                            data-yarn-dk="549"
+                        >
+                            <span class="rc-size-name">童4</span><span
+                                class="rc-size-chest">58cm</span
+                            >
+                        </button>
+                        <button
+                            class="rc-size"
+                            data-neck="25"
+                            data-raglan="22"
+                            data-sleeve="25"
+                            data-cuff="14"
+                            data-body="20"
+                            data-chest="65"
+                            data-yarn-bulky="466"
+                            data-yarn-worsted="567"
+                            data-yarn-dk="686"
+                        >
+                            <span class="rc-size-name">童6</span><span
+                                class="rc-size-chest">65cm</span
+                            >
+                        </button>
+                        <button
+                            class="rc-size"
+                            data-neck="28"
+                            data-raglan="23"
+                            data-sleeve="29"
+                            data-cuff="15"
+                            data-body="24"
+                            data-chest="69"
+                            data-yarn-bulky="567"
+                            data-yarn-worsted="686"
+                            data-yarn-dk="823"
+                        >
+                            <span class="rc-size-name">童8</span><span
+                                class="rc-size-chest">69cm</span
+                            >
+                        </button>
+                        <button
+                            class="rc-size"
+                            data-neck="30"
+                            data-raglan="25"
+                            data-sleeve="33"
+                            data-cuff="15"
+                            data-body="28"
+                            data-chest="71"
+                            data-yarn-bulky="604"
+                            data-yarn-worsted="732"
+                            data-yarn-dk="878"
+                        >
+                            <span class="rc-size-name">童10</span><span
+                                class="rc-size-chest">71cm</span
+                            >
+                        </button>
+                        <button
+                            class="rc-size"
+                            data-neck="33"
+                            data-raglan="27"
+                            data-sleeve="37"
+                            data-cuff="18"
+                            data-body="33"
+                            data-chest="76"
+                            data-yarn-bulky="722"
+                            data-yarn-worsted="869"
+                            data-yarn-dk="1042"
+                        >
+                            <span class="rc-size-name">童12</span><span
+                                class="rc-size-chest">76cm</span
+                            >
+                        </button>
+                    </div>
+
+                    <div
+                        class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2"
+                    >
+                        成人
+                    </div>
+                    <div class="flex flex-wrap gap-2" id="size-adults">
+                        <button
+                            class="rc-size"
+                            data-neck="34"
+                            data-raglan="28"
+                            data-sleeve="41"
+                            data-cuff="18"
+                            data-body="34"
+                            data-chest="81"
+                            data-yarn-bulky="759"
+                            data-yarn-worsted="914"
+                            data-yarn-dk="1097"
+                        >
+                            <span class="rc-size-name">32</span><span
+                                class="rc-size-chest">81cm</span
+                            >
+                        </button>
+                        <button
+                            class="rc-size"
+                            data-neck="36"
+                            data-raglan="29"
+                            data-sleeve="42"
+                            data-cuff="18"
+                            data-body="36"
+                            data-chest="86"
+                            data-yarn-bulky="832"
+                            data-yarn-worsted="1006"
+                            data-yarn-dk="1207"
+                        >
+                            <span class="rc-size-name">34</span><span
+                                class="rc-size-chest">86cm</span
+                            >
+                        </button>
+                        <button
+                            class="rc-size"
+                            data-neck="37"
+                            data-raglan="30"
+                            data-sleeve="43"
+                            data-cuff="19"
+                            data-body="37"
+                            data-chest="91"
+                            data-yarn-bulky="951"
+                            data-yarn-worsted="1143"
+                            data-yarn-dk="1372"
+                        >
+                            <span class="rc-size-name">36</span><span
+                                class="rc-size-chest">91cm</span
+                            >
+                        </button>
+                        <button
+                            class="rc-size"
+                            data-neck="38"
+                            data-raglan="33"
+                            data-sleeve="44"
+                            data-cuff="19"
+                            data-body="38"
+                            data-chest="97"
+                            data-yarn-bulky="988"
+                            data-yarn-worsted="1189"
+                            data-yarn-dk="1426"
+                        >
+                            <span class="rc-size-name">38</span><span
+                                class="rc-size-chest">97cm</span
+                            >
+                        </button>
+                        <button
+                            class="rc-size"
+                            data-neck="39"
+                            data-raglan="36"
+                            data-sleeve="46"
+                            data-cuff="20"
+                            data-body="39"
+                            data-chest="102"
+                            data-yarn-bulky="1024"
+                            data-yarn-worsted="1234"
+                            data-yarn-dk="1481"
+                        >
+                            <span class="rc-size-name">40</span><span
+                                class="rc-size-chest">102cm</span
+                            >
+                        </button>
+                        <button
+                            class="rc-size"
+                            data-neck="41"
+                            data-raglan="38"
+                            data-sleeve="47"
+                            data-cuff="20"
+                            data-body="41"
+                            data-chest="107"
+                            data-yarn-bulky="1097"
+                            data-yarn-worsted="1326"
+                            data-yarn-dk="1591"
+                        >
+                            <span class="rc-size-name">42</span><span
+                                class="rc-size-chest">107cm</span
+                            >
+                        </button>
+                        <button
+                            class="rc-size"
+                            data-neck="42"
+                            data-raglan="41"
+                            data-sleeve="48"
+                            data-cuff="22"
+                            data-body="42"
+                            data-chest="112"
+                            data-yarn-bulky="1143"
+                            data-yarn-worsted="1372"
+                            data-yarn-dk="1646"
+                        >
+                            <span class="rc-size-name">44</span><span
+                                class="rc-size-chest">112cm</span
+                            >
+                        </button>
+                        <button
+                            class="rc-size"
+                            data-neck="43"
+                            data-raglan="43"
+                            data-sleeve="50"
+                            data-cuff="22"
+                            data-body="43"
+                            data-chest="117"
+                            data-yarn-bulky="1180"
+                            data-yarn-worsted="1417"
+                            data-yarn-dk="1701"
+                        >
+                            <span class="rc-size-name">46</span><span
+                                class="rc-size-chest">117cm</span
+                            >
+                        </button>
+                        <button
+                            class="rc-size"
+                            data-neck="44"
+                            data-raglan="46"
+                            data-sleeve="51"
+                            data-cuff="22"
+                            data-body="44"
+                            data-chest="122"
+                            data-yarn-bulky="1253"
+                            data-yarn-worsted="1509"
+                            data-yarn-dk="1811"
+                        >
+                            <span class="rc-size-name">48</span><span
+                                class="rc-size-chest">122cm</span
+                            >
+                        </button>
+                        <button
+                            class="rc-size"
+                            data-neck="46"
+                            data-raglan="48"
+                            data-sleeve="52"
+                            data-cuff="23"
+                            data-body="46"
+                            data-chest="127"
+                            data-yarn-bulky="1280"
+                            data-yarn-worsted="1554"
+                            data-yarn-dk="1865"
+                        >
+                            <span class="rc-size-name">50</span><span
+                                class="rc-size-chest">127cm</span
+                            >
+                        </button>
+                        <button
+                            class="rc-size"
+                            data-neck="47"
+                            data-raglan="51"
+                            data-sleeve="53"
+                            data-cuff="24"
+                            data-body="47"
+                            data-chest="132"
+                            data-yarn-bulky="1372"
+                            data-yarn-worsted="1646"
+                            data-yarn-dk="1975"
+                        >
+                            <span class="rc-size-name">52</span><span
+                                class="rc-size-chest">132cm</span
+                            >
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 毛线用量（选中尺码后显示） -->
+                <div
+                    id="yarn-info"
+                    class="hidden mb-5 rounded-lg bg-primary/5 border border-primary/15 p-4"
+                >
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="text-sm font-semibold">毛线用量参考</span>
+                        <span
+                            class="text-xs text-muted-foreground"
+                            id="yarn-size-label"></span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 text-center text-sm">
+                        <div>
+                            <div class="font-bold text-primary" id="yarn-bulky">
+                                --
+                            </div>
+                            <div class="text-xs text-muted-foreground">
+                                粗线 (m)
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                class="font-bold text-primary"
+                                id="yarn-worsted"
+                            >
+                                --
+                            </div>
+                            <div class="text-xs text-muted-foreground">
+                                中粗 (m)
+                            </div>
+                        </div>
+                        <div>
+                            <div class="font-bold text-primary" id="yarn-dk">
+                                --
+                            </div>
+                            <div class="text-xs text-muted-foreground">
+                                细线 (m)
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-muted-foreground mt-2">
+                        总是多买一团线，保留收据。
+                    </p>
+                </div>
+
+                <!-- 测量数据输入 -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-5">
+                    <div>
+                        <label for="neckCirc" class="rc-label"
+                            >领围 <span
+                                class="font-normal text-muted-foreground"
+                                >(cm)</span
+                            ></label
+                        >
+                        <input
+                            type="number"
+                            id="neckCirc"
+                            step="0.5"
+                            min="1"
+                            placeholder="36"
+                            class="rc-input w-full"
+                        />
+                    </div>
+                    <div>
+                        <label for="raglanLength" class="rc-label"
+                            >插肩长度 <span
+                                class="font-normal text-muted-foreground"
+                                >(cm)</span
+                            ></label
+                        >
+                        <input
+                            type="number"
+                            id="raglanLength"
+                            step="0.5"
+                            min="1"
+                            placeholder="30"
+                            class="rc-input w-full"
+                        />
+                    </div>
+                    <div>
+                        <label for="bodyLength" class="rc-label"
+                            >身长 <span
+                                class="font-normal text-muted-foreground"
+                                >(cm)</span
+                            ></label
+                        >
+                        <input
+                            type="number"
+                            id="bodyLength"
+                            step="0.5"
+                            min="1"
+                            placeholder="38"
+                            class="rc-input w-full"
+                        />
+                    </div>
+                    <div>
+                        <label for="cuffCirc" class="rc-label"
+                            >袖口周长 <span
+                                class="font-normal text-muted-foreground"
+                                >(cm)</span
+                            ></label
+                        >
+                        <input
+                            type="number"
+                            id="cuffCirc"
+                            step="0.5"
+                            min="1"
+                            placeholder="19"
+                            class="rc-input w-full"
+                        />
+                    </div>
+                    <div>
+                        <label for="sleeveLength" class="rc-label"
+                            >袖长 <span
+                                class="font-normal text-muted-foreground"
+                                >(cm)</span
+                            ></label
+                        >
+                        <input
+                            type="number"
+                            id="sleeveLength"
+                            step="0.5"
+                            min="1"
+                            placeholder="46"
+                            class="rc-input w-full"
+                        />
+                    </div>
+                </div>
+                <p class="text-xs text-muted-foreground mt-3">
+                    领围=领口尺寸 &middot; 插肩=锁骨到腋下 &middot;
+                    身长=腋下到下摆 &middot; 袖长=腋下到手腕
+                </p>
+            </section>
+
+            <!-- Step 3: 计算结果 -->
+            <section class="rc-section" id="results-section">
+                <h2 class="rc-h2">
+                    <span class="rc-step">3</span>
+                    计算结果
+                </h2>
+
+                <!-- 领口针数 -->
+                <h3
+                    class="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3"
+                >
+                    领口分配
+                </h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+                    <div class="rc-metric">
+                        <div class="rc-metric-value" id="totalNeck">--</div>
+                        <div class="rc-metric-label">总针数</div>
+                    </div>
+                    <div class="rc-metric">
+                        <div class="rc-metric-value" id="backStitches">--</div>
+                        <div class="rc-metric-label">后片</div>
+                    </div>
+                    <div class="rc-metric">
+                        <div class="rc-metric-value" id="sleeveStitches">
+                            --
+                        </div>
+                        <div class="rc-metric-label">每个袖子</div>
+                    </div>
+                    <div class="rc-metric">
+                        <div class="rc-metric-value" id="frontStitches">--</div>
+                        <div class="rc-metric-label">前片</div>
+                    </div>
+                </div>
+
+                <!-- 前片分解 -->
+                <h3
+                    class="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3"
+                >
+                    前片分解
+                </h3>
+                <div class="grid grid-cols-3 gap-3 mb-6">
+                    <div class="rc-metric rc-metric--sm">
+                        <div class="rc-metric-value text-lg" id="leftFront">
+                            --
+                        </div>
+                        <div class="rc-metric-label">左前</div>
+                    </div>
+                    <div class="rc-metric rc-metric--sm">
+                        <div class="rc-metric-value text-lg" id="centerFront">
+                            --
+                        </div>
+                        <div class="rc-metric-label">前中心</div>
+                    </div>
+                    <div class="rc-metric rc-metric--sm">
+                        <div class="rc-metric-value text-lg" id="rightFront">
+                            --
+                        </div>
+                        <div class="rc-metric-label">右前</div>
+                    </div>
+                </div>
+
+                <!-- 其他 -->
+                <h3
+                    class="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3"
+                >
+                    其他数据
+                </h3>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="rc-metric rc-metric--sm">
+                        <div class="rc-metric-value text-lg" id="cuffStitches">
+                            --
+                        </div>
+                        <div class="rc-metric-label">袖口针数</div>
+                    </div>
+                    <div class="rc-metric rc-metric--sm">
+                        <div
+                            class="rc-metric-value text-lg"
+                            id="underarmStitches"
+                        >
+                            --
+                        </div>
+                        <div class="rc-metric-label">腋下加针（2.5cm）</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 4: 起针顺序 -->
+            <section class="rc-section">
+                <h2 class="rc-h2">
+                    <span class="rc-step">4</span>
+                    起针顺序
+                </h2>
+                <p class="text-sm text-muted-foreground mb-4">
+                    按以下顺序依次起针，形成领口造型：
+                </p>
+                <div
+                    class="rounded-xl border-2 border-dashed border-primary/30 bg-primary/5 p-5"
+                >
+                    <div
+                        class="flex flex-wrap gap-2 justify-center items-center text-sm"
+                    >
+                        <span class="rc-chip rc-chip--stitch">1针</span>
+                        <span class="rc-chip rc-chip--marker-a">记号A</span>
+                        <span class="rc-chip rc-chip--stitch">1针(加)</span>
+                        <span class="rc-chip rc-chip--marker-b">记号B</span>
+                        <span class="rc-chip rc-chip--stitch" id="sleeve1CastOn"
+                            >袖+2</span
+                        >
+                        <span class="rc-chip rc-chip--marker-b">记号B</span>
+                        <span class="rc-chip rc-chip--stitch" id="backCastOn"
+                            >后片+2</span
+                        >
+                        <span class="rc-chip rc-chip--marker-b">记号B</span>
+                        <span class="rc-chip rc-chip--stitch" id="sleeve2CastOn"
+                            >袖+2</span
+                        >
+                        <span class="rc-chip rc-chip--marker-b">记号B</span>
+                        <span class="rc-chip rc-chip--stitch">1针(加)</span>
+                        <span class="rc-chip rc-chip--marker-a">记号A</span>
+                        <span class="rc-chip rc-chip--stitch">1针</span>
+                    </div>
+                    <p class="text-center mt-4 font-semibold">
+                        初始起针总数：<span
+                            class="text-primary text-lg"
+                            id="initialCastOn">--</span
+                        > 针
+                    </p>
+                </div>
+                <div
+                    class="mt-4 rounded-lg bg-accent/10 border-l-4 border-accent p-4 text-sm"
+                >
+                    <strong>注意：</strong
+                    >4个B记号分隔前片、袖子和后片。2个A记号追踪前片加针。来回织，在正面行每个B记号前后加针，同时在开头和结尾加针，直到所有前片针数加完。
+                </div>
+            </section>
+
+            <div class="text-center py-4 no-print">
+                <button
+                    onclick="window.print()"
+                    class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
+                >
+                    打印完整图样
+                </button>
+            </div>
         </div>
-      </section>
 
-      <section class="rc-section">
-        <h2 class="rc-h2">织袖子</h2>
-        <ol class="rc-steps-list">
-          <li>把袖子针数穿到 40cm 环形针上</li>
-          <li>挑起腋下加的针数，圈织</li>
-          <li>收袖：每 2.5cm 在圈开头和结尾各减1针</li>
-          <li>继续直到达到想要的袖口针数</li>
-          <li>收针前加罗纹或平面花样</li>
-          <li>罗纹用小一号针</li>
-        </ol>
-        <div class="mt-3 rounded-lg bg-accent/10 border-l-4 border-accent p-4 text-sm">
-          <strong>重要：</strong>记录第一只袖子的过程，第二只袖子照做！
-        </div>
-      </section>
+        <!-- ==================== Tab: 织法说明 ==================== -->
+        <div id="guide" class="rc-panel">
+            <section class="rc-section">
+                <h2 class="rc-h2">所需工具</h2>
+                <div class="grid sm:grid-cols-2 gap-2">
+                    <div class="rc-guide-item">所需用量的毛线（参考表格）</div>
+                    <div class="rc-guide-item">环形针：40cm 和 48cm 各一副</div>
+                    <div class="rc-guide-item">2个同色记号扣（记号A）</div>
+                    <div class="rc-guide-item">4个另一色记号扣（记号B）</div>
+                    <div class="rc-guide-item">软尺</div>
+                    <div class="rc-guide-item">别线或针数固定器</div>
+                </div>
+            </section>
 
-      <section class="rc-section">
-        <h2 class="rc-h2">织领子</h2>
-        <p class="text-sm text-muted-foreground mb-3">沿领口（起针边）挑起所有针数织领子。可选：</p>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          <div class="rc-guide-item text-center">2x2 罗纹</div>
-          <div class="rc-guide-item text-center">单罗纹</div>
-          <div class="rc-guide-item text-center">与下摆统一</div>
-          <div class="rc-guide-item text-center">装饰性边缘</div>
+            <section class="rc-section">
+                <h2 class="rc-h2">织领口</h2>
+                <p class="text-sm text-muted-foreground mb-3">
+                    领口起针是不完整的圆圈。来回织直到前片针数加完，然后合圈。
+                </p>
+                <ol class="rc-steps-list">
+                    <li>按计算器显示的顺序起针</li>
+                    <li>来回织，在正面行每个B记号前后各加1针</li>
+                    <li>同时，在每个正面行的开头和结尾各加1针</li>
+                    <li>继续直到左前和右前的针数都加完</li>
+                    <li>一次性加上前中心的针数</li>
+                    <li>合圈，开始圈织</li>
+                </ol>
+            </section>
+
+            <section class="rc-section">
+                <h2 class="rc-h2">织身体</h2>
+                <ol class="rc-steps-list">
+                    <li>圈织后第一圈取下A记号</li>
+                    <li>继续织，每隔一圈在每个B记号前后加针</li>
+                    <li>当插肩长度达到测量值时，把袖子针数穿到别线上</li>
+                    <li>取下B记号</li>
+                    <li>在每个腋下加 2.5cm 的针数</li>
+                    <li>继续圈织直筒到想要的身长</li>
+                    <li>收针前加罗纹或平面花样防止卷边</li>
+                </ol>
+                <div
+                    class="mt-3 rounded-lg bg-primary/5 border-l-4 border-primary p-4 text-sm"
+                >
+                    <strong>身体造型：</strong
+                    >可以收腰、保持直筒、A字型或沙漏型，在「侧缝」位置加减针即可。
+                </div>
+            </section>
+
+            <section class="rc-section">
+                <h2 class="rc-h2">织袖子</h2>
+                <ol class="rc-steps-list">
+                    <li>把袖子针数穿到 40cm 环形针上</li>
+                    <li>挑起腋下加的针数，圈织</li>
+                    <li>收袖：每 2.5cm 在圈开头和结尾各减1针</li>
+                    <li>继续直到达到想要的袖口针数</li>
+                    <li>收针前加罗纹或平面花样</li>
+                    <li>罗纹用小一号针</li>
+                </ol>
+                <div
+                    class="mt-3 rounded-lg bg-accent/10 border-l-4 border-accent p-4 text-sm"
+                >
+                    <strong>重要：</strong
+                    >记录第一只袖子的过程，第二只袖子照做！
+                </div>
+            </section>
+
+            <section class="rc-section">
+                <h2 class="rc-h2">织领子</h2>
+                <p class="text-sm text-muted-foreground mb-3">
+                    沿领口（起针边）挑起所有针数织领子。可选：
+                </p>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    <div class="rc-guide-item text-center">2x2 罗纹</div>
+                    <div class="rc-guide-item text-center">单罗纹</div>
+                    <div class="rc-guide-item text-center">与下摆统一</div>
+                    <div class="rc-guide-item text-center">装饰性边缘</div>
+                </div>
+            </section>
         </div>
-      </section>
+
+        <!-- ==================== Tab: 款式变化 ==================== -->
+        <div id="variations" class="rc-panel">
+            <section class="rc-section">
+                <h2 class="rc-h2">领型变化</h2>
+                <div class="space-y-4">
+                    <div class="rounded-lg border border-border p-4">
+                        <h3 class="font-semibold mb-1">船领</h3>
+                        <p class="text-sm text-muted-foreground">
+                            量好想要的领围（确保能套过头）。用计算器算出针数，但一次性起所有针，直接圈织。不需要A记号。
+                        </p>
+                    </div>
+                    <div class="rounded-lg border border-border p-4">
+                        <h3 class="font-semibold mb-1">V领</h3>
+                        <p class="text-sm text-muted-foreground">
+                            按圆领方式起针，但前片不是每隔一行加针，而是每4-6行在开头和结尾加针。直到所有前片针数加完后圈织。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="rc-section">
+                <h2 class="rc-h2">开衫选项</h2>
+                <div class="space-y-4">
+                    <div class="rounded-lg border border-border p-4">
+                        <h3 class="font-semibold mb-2">方法一：Steek 剪裁</h3>
+                        <ol class="rc-steps-list">
+                            <li>在前中心多加6针，织种子针作为 steek</li>
+                            <li>Steek 一直织到下摆</li>
+                            <li>织完后用缝纫机在中心两侧缝一道</li>
+                            <li>在缝线中间剪开，折到内侧缝好</li>
+                            <li>加拉链或扣襟</li>
+                        </ol>
+                    </div>
+                    <div class="rounded-lg border border-border p-4">
+                        <h3 class="font-semibold mb-1">方法二：平织</h3>
+                        <p class="text-sm text-muted-foreground">
+                            领口完成后不圈织，继续来回织整件毛衣，前面留开口。加拉链或扣襟。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="rc-section">
+                <h2 class="rc-h2">颜色与花样</h2>
+                <div class="grid sm:grid-cols-2 gap-2">
+                    <div class="rc-guide-item">
+                        <strong>横条纹</strong>效果很好 — 插肩线自动对齐
+                    </div>
+                    <div class="rc-guide-item">
+                        用零线的好机会（确保密度相近）
+                    </div>
+                    <div class="rc-guide-item">尝试绞花、凸纹花样或罗纹</div>
+                    <div class="rc-guide-item">
+                        记录袖子花样以便两只袖子一致
+                    </div>
+                </div>
+            </section>
+
+            <section class="rc-section">
+                <h2 class="rc-h2">选线指南</h2>
+                <div class="grid sm:grid-cols-2 gap-2">
+                    <div class="rc-guide-item">
+                        <strong>天然纤维</strong>比合成纤维更耐用、保形性更好
+                    </div>
+                    <div class="rc-guide-item">
+                        <strong>羊毛</strong>对初学者更友好，容易拆改
+                    </div>
+                    <div class="rc-guide-item">
+                        <strong>羊驼毛</strong>较重，容易下垂 — 织样片时仔细观察
+                    </div>
+                    <div class="rc-guide-item">
+                        <strong>毛茸茸的线</strong>会遮盖花样 — 织绞花用光滑的线
+                    </div>
+                    <div class="rc-guide-item">
+                        <strong>粗线</strong>对体型丰满者不友好 — 选有垂感的线
+                    </div>
+                    <div class="rc-guide-item">
+                        <strong>可机洗线</strong>推荐用于儿童服装
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer
+            class="text-center text-xs text-muted-foreground pt-6 pb-2 border-t border-border mt-8 no-print"
+        >
+            <p>
+                基于 Jean Dickinson（Threads Magazine, 1988）和 Pamela Costello
+                的魔法插肩方法
+            </p>
+            <p class="mt-1">本计算器仅供个人非商业使用</p>
+        </footer>
     </div>
-
-    <!-- ==================== Tab: 款式变化 ==================== -->
-    <div id="variations" class="rc-panel">
-      <section class="rc-section">
-        <h2 class="rc-h2">领型变化</h2>
-        <div class="space-y-4">
-          <div class="rounded-lg border border-border p-4">
-            <h3 class="font-semibold mb-1">船领</h3>
-            <p class="text-sm text-muted-foreground">量好想要的领围（确保能套过头）。用计算器算出针数，但一次性起所有针，直接圈织。不需要A记号。</p>
-          </div>
-          <div class="rounded-lg border border-border p-4">
-            <h3 class="font-semibold mb-1">V领</h3>
-            <p class="text-sm text-muted-foreground">按圆领方式起针，但前片不是每隔一行加针，而是每4-6行在开头和结尾加针。直到所有前片针数加完后圈织。</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="rc-section">
-        <h2 class="rc-h2">开衫选项</h2>
-        <div class="space-y-4">
-          <div class="rounded-lg border border-border p-4">
-            <h3 class="font-semibold mb-2">方法一：Steek 剪裁</h3>
-            <ol class="rc-steps-list">
-              <li>在前中心多加6针，织种子针作为 steek</li>
-              <li>Steek 一直织到下摆</li>
-              <li>织完后用缝纫机在中心两侧缝一道</li>
-              <li>在缝线中间剪开，折到内侧缝好</li>
-              <li>加拉链或扣襟</li>
-            </ol>
-          </div>
-          <div class="rounded-lg border border-border p-4">
-            <h3 class="font-semibold mb-1">方法二：平织</h3>
-            <p class="text-sm text-muted-foreground">领口完成后不圈织，继续来回织整件毛衣，前面留开口。加拉链或扣襟。</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="rc-section">
-        <h2 class="rc-h2">颜色与花样</h2>
-        <div class="grid sm:grid-cols-2 gap-2">
-          <div class="rc-guide-item"><strong>横条纹</strong>效果很好 — 插肩线自动对齐</div>
-          <div class="rc-guide-item">用零线的好机会（确保密度相近）</div>
-          <div class="rc-guide-item">尝试绞花、凸纹花样或罗纹</div>
-          <div class="rc-guide-item">记录袖子花样以便两只袖子一致</div>
-        </div>
-      </section>
-
-      <section class="rc-section">
-        <h2 class="rc-h2">选线指南</h2>
-        <div class="grid sm:grid-cols-2 gap-2">
-          <div class="rc-guide-item"><strong>天然纤维</strong>比合成纤维更耐用、保形性更好</div>
-          <div class="rc-guide-item"><strong>羊毛</strong>对初学者更友好，容易拆改</div>
-          <div class="rc-guide-item"><strong>羊驼毛</strong>较重，容易下垂 — 织样片时仔细观察</div>
-          <div class="rc-guide-item"><strong>毛茸茸的线</strong>会遮盖花样 — 织绞花用光滑的线</div>
-          <div class="rc-guide-item"><strong>粗线</strong>对体型丰满者不友好 — 选有垂感的线</div>
-          <div class="rc-guide-item"><strong>可机洗线</strong>推荐用于儿童服装</div>
-        </div>
-      </section>
-    </div>
-
-    <!-- Footer -->
-    <footer class="text-center text-xs text-muted-foreground pt-6 pb-2 border-t border-border mt-8 no-print">
-      <p>基于 Jean Dickinson（Threads Magazine, 1988）和 Pamela Costello 的魔法插肩方法</p>
-      <p class="mt-1">本计算器仅供个人非商业使用</p>
-    </footer>
-  </div>
 </BaseLayout>
 
 <style>
-  /* ===== Tabs ===== */
-  .rc-tab {
-    @apply px-4 py-2.5 text-sm font-medium rounded-t-lg transition-colors;
-    @apply text-muted-foreground hover:text-foreground hover:bg-muted/50;
-    @apply border-b-2 border-transparent -mb-px;
-  }
-  .rc-tab.active {
-    @apply text-primary border-primary bg-transparent;
-  }
+    /* ===== Tabs ===== */
+    .rc-tab {
+        @apply px-4 py-2.5 text-sm font-medium rounded-t-lg transition-colors;
+        @apply text-muted-foreground hover:text-foreground hover:bg-muted/50;
+        @apply border-b-2 border-transparent -mb-px;
+    }
+    .rc-tab.active {
+        @apply text-primary border-primary bg-transparent;
+    }
 
-  .rc-panel { display: none; }
-  .rc-panel.active { display: block; }
+    .rc-panel {
+        display: none;
+    }
+    .rc-panel.active {
+        display: block;
+    }
 
-  /* ===== Sections ===== */
-  .rc-section {
-    @apply rounded-xl border border-border bg-card p-5 sm:p-6 mb-5;
-  }
-  .rc-h2 {
-    @apply text-lg font-semibold mb-4 flex items-center gap-3;
-  }
-  .rc-step {
-    @apply inline-flex items-center justify-center w-7 h-7 rounded-full text-sm font-bold;
-    @apply bg-primary text-primary-foreground shrink-0;
-  }
+    /* ===== Sections ===== */
+    .rc-section {
+        @apply rounded-xl border border-border bg-card p-5 sm:p-6 mb-5;
+    }
+    .rc-h2 {
+        @apply text-lg font-semibold mb-4 flex items-center gap-3;
+    }
+    .rc-step {
+        @apply inline-flex items-center justify-center w-7 h-7 rounded-full text-sm font-bold;
+        @apply bg-primary text-primary-foreground shrink-0;
+    }
 
-  /* ===== Form ===== */
-  .rc-label {
-    @apply block text-sm font-medium mb-1.5;
-  }
-  .rc-input {
-    @apply px-3 py-2.5 rounded-lg border border-border bg-background text-foreground;
-    @apply text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary;
-  }
+    /* ===== Form ===== */
+    .rc-label {
+        @apply block text-sm font-medium mb-1.5;
+    }
+    .rc-input {
+        @apply px-3 py-2.5 rounded-lg border border-border bg-background text-foreground;
+        @apply text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary;
+    }
 
-  /* ===== Metrics ===== */
-  .rc-metric {
-    @apply rounded-lg bg-muted/50 p-4 text-center;
-  }
-  .rc-metric--sm {
-    @apply p-3;
-  }
-  .rc-metric-value {
-    @apply text-2xl font-bold text-primary tabular-nums;
-  }
-  .rc-metric-label {
-    @apply text-xs text-muted-foreground mt-1;
-  }
+    /* ===== Metrics ===== */
+    .rc-metric {
+        @apply rounded-lg bg-muted/50 p-4 text-center;
+    }
+    .rc-metric--sm {
+        @apply p-3;
+    }
+    .rc-metric-value {
+        @apply text-2xl font-bold text-primary tabular-nums;
+    }
+    .rc-metric-label {
+        @apply text-xs text-muted-foreground mt-1;
+    }
 
-  /* ===== Chips (cast-on diagram) ===== */
-  .rc-chip {
-    @apply inline-block px-3 py-1.5 rounded-full font-medium;
-  }
-  .rc-chip--stitch {
-    @apply bg-primary text-primary-foreground;
-  }
-  .rc-chip--marker-a {
-    @apply bg-accent text-accent-foreground;
-  }
-  .rc-chip--marker-b {
-    @apply text-white;
-    background-color: #4ECDC4;
-  }
+    /* ===== Chips (cast-on diagram) ===== */
+    .rc-chip {
+        @apply inline-block px-3 py-1.5 rounded-full font-medium;
+    }
+    .rc-chip--stitch {
+        @apply bg-primary text-primary-foreground;
+    }
+    .rc-chip--marker-a {
+        @apply bg-accent text-accent-foreground;
+    }
+    .rc-chip--marker-b {
+        @apply text-white;
+        background-color: #4ecdc4;
+    }
 
-  /* ===== Size selector ===== */
-  .rc-size {
-    @apply flex flex-col items-center px-3 py-2 rounded-lg border border-border;
-    @apply bg-card transition-all cursor-pointer text-center;
-    @apply hover:border-primary/50 hover:bg-primary/5;
-    min-width: 4rem;
-  }
-  .rc-size.active {
-    @apply border-primary bg-primary/10 ring-2 ring-primary/20;
-  }
-  .rc-size-name {
-    @apply text-sm font-semibold leading-tight;
-  }
-  .rc-size-chest {
-    @apply text-xs text-muted-foreground leading-tight mt-0.5;
-  }
-  .rc-size.active .rc-size-name {
-    @apply text-primary;
-  }
+    /* ===== Size selector ===== */
+    .rc-size {
+        @apply flex flex-col items-center px-3 py-2 rounded-lg border border-border;
+        @apply bg-card transition-all cursor-pointer text-center;
+        @apply hover:border-primary/50 hover:bg-primary/5;
+        min-width: 4rem;
+    }
+    .rc-size.active {
+        @apply border-primary bg-primary/10 ring-2 ring-primary/20;
+    }
+    .rc-size-name {
+        @apply text-sm font-semibold leading-tight;
+    }
+    .rc-size-chest {
+        @apply text-xs text-muted-foreground leading-tight mt-0.5;
+    }
+    .rc-size.active .rc-size-name {
+        @apply text-primary;
+    }
 
-  /* ===== Guide items ===== */
-  .rc-guide-item {
-    @apply rounded-lg bg-muted/50 px-4 py-3 text-sm;
-  }
+    /* ===== Guide items ===== */
+    .rc-guide-item {
+        @apply rounded-lg bg-muted/50 px-4 py-3 text-sm;
+    }
 
-  /* ===== Steps list ===== */
-  .rc-steps-list {
-    @apply space-y-2 text-sm;
-    counter-reset: step;
-    list-style: none;
-    padding-left: 0;
-  }
-  .rc-steps-list li {
-    @apply flex gap-3 items-start;
-    counter-increment: step;
-  }
-  .rc-steps-list li::before {
-    content: counter(step);
-    @apply inline-flex items-center justify-center w-5 h-5 rounded-full text-xs font-medium shrink-0 mt-0.5;
-    @apply bg-muted text-muted-foreground;
-  }
+    /* ===== Steps list ===== */
+    .rc-steps-list {
+        @apply space-y-2 text-sm;
+        counter-reset: step;
+        list-style: none;
+        padding-left: 0;
+    }
+    .rc-steps-list li {
+        @apply flex gap-3 items-start;
+        counter-increment: step;
+    }
+    .rc-steps-list li::before {
+        content: counter(step);
+        @apply inline-flex items-center justify-center w-5 h-5 rounded-full text-xs font-medium shrink-0 mt-0.5;
+        @apply bg-muted text-muted-foreground;
+    }
 
-  /* ===== Print ===== */
-  @media print {
-    .no-print { display: none !important; }
-    .rc-section { break-inside: avoid; border: 1px solid #ddd; box-shadow: none; }
-    .rc-panel { display: block !important; }
-    #rc-tabs { display: none; }
-  }
+    /* ===== Print ===== */
+    @media print {
+        .no-print {
+            display: none !important;
+        }
+        .rc-section {
+            break-inside: avoid;
+            border: 1px solid #ddd;
+            box-shadow: none;
+        }
+        .rc-panel {
+            display: block !important;
+        }
+        #rc-tabs {
+            display: none;
+        }
+    }
 </style>
 
 <script>
-  // Tab switching
-  document.querySelectorAll('#rc-tabs .rc-tab').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tabId = btn.getAttribute('data-tab');
-      if (!tabId) return;
-      document.querySelectorAll('.rc-panel').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('#rc-tabs .rc-tab').forEach(b => b.classList.remove('active'));
-      document.getElementById(tabId)?.classList.add('active');
-      btn.classList.add('active');
-    });
-  });
-
-  // Size button click → fill inputs & show yarn info
-  document.querySelectorAll('.rc-size').forEach(btn => {
-    btn.addEventListener('click', () => {
-      // Toggle: deselect if already active
-      const wasActive = btn.classList.contains('active');
-      document.querySelectorAll('.rc-size').forEach(b => b.classList.remove('active'));
-
-      if (wasActive) {
-        // Deselect — clear inputs & hide yarn
-        ['neckCirc','raglanLength','sleeveLength','cuffCirc','bodyLength'].forEach(id => {
-          (document.getElementById(id) as HTMLInputElement).value = '';
+    // Tab switching
+    document.querySelectorAll("#rc-tabs .rc-tab").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const tabId = btn.getAttribute("data-tab");
+            if (!tabId) return;
+            document
+                .querySelectorAll(".rc-panel")
+                .forEach((p) => p.classList.remove("active"));
+            document
+                .querySelectorAll("#rc-tabs .rc-tab")
+                .forEach((b) => b.classList.remove("active"));
+            document.getElementById(tabId)?.classList.add("active");
+            btn.classList.add("active");
         });
-        document.getElementById('yarn-info')?.classList.add('hidden');
-        calculateAll();
-        return;
-      }
-
-      btn.classList.add('active');
-      const d = (btn as HTMLElement).dataset;
-      const set = (id: string, v: string | undefined) => {
-        const el = document.getElementById(id) as HTMLInputElement;
-        if (el && v) el.value = v;
-      };
-      set('neckCirc', d.neck);
-      set('raglanLength', d.raglan);
-      set('sleeveLength', d.sleeve);
-      set('cuffCirc', d.cuff);
-      set('bodyLength', d.body);
-
-      // Show yarn info
-      const yarnBox = document.getElementById('yarn-info');
-      if (yarnBox) {
-        yarnBox.classList.remove('hidden');
-        const sizeName = btn.querySelector('.rc-size-name')?.textContent || '';
-        setText('yarn-size-label', `尺码 ${sizeName} · 胸围 ${d.chest}cm`);
-        setText('yarn-bulky', d.yarnBulky || '--');
-        setText('yarn-worsted', d.yarnWorsted || '--');
-        setText('yarn-dk', d.yarnDk || '--');
-      }
-
-      calculateAll();
     });
-  });
 
-  // Input listeners
-  document.querySelectorAll('#swatchWidth, #neckCirc, #raglanLength, #bodyLength, #cuffCirc, #sleeveLength').forEach(input => {
-    input.addEventListener('input', calculateAll);
-  });
+    // Size button click → fill inputs & show yarn info
+    document.querySelectorAll(".rc-size").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            // Toggle: deselect if already active
+            const wasActive = btn.classList.contains("active");
+            document
+                .querySelectorAll(".rc-size")
+                .forEach((b) => b.classList.remove("active"));
 
-  function setText(id: string, v: string) {
-    const el = document.getElementById(id);
-    if (el) el.textContent = v;
-  }
+            if (wasActive) {
+                // Deselect — clear inputs & hide yarn
+                [
+                    "neckCirc",
+                    "raglanLength",
+                    "sleeveLength",
+                    "cuffCirc",
+                    "bodyLength",
+                ].forEach((id) => {
+                    (document.getElementById(id) as HTMLInputElement).value =
+                        "";
+                });
+                document.getElementById("yarn-info")?.classList.add("hidden");
+                calculateAll();
+                return;
+            }
 
-  function calculateAll() {
-    const val = (id: string) => parseFloat((document.getElementById(id) as HTMLInputElement)?.value) || 0;
-    const swatchWidth = val('swatchWidth');
-    const neckCirc = val('neckCirc');
-    const cuffCirc = val('cuffCirc');
+            btn.classList.add("active");
+            const d = (btn as HTMLElement).dataset;
+            const set = (id: string, v: string | undefined) => {
+                const el = document.getElementById(id) as HTMLInputElement;
+                if (el && v) el.value = v;
+            };
+            set("neckCirc", d.neck);
+            set("raglanLength", d.raglan);
+            set("sleeveLength", d.sleeve);
+            set("cuffCirc", d.cuff);
+            set("bodyLength", d.body);
 
-    let gauge = 0;
-    if (swatchWidth > 0) {
-      gauge = 20 / swatchWidth;
-      setText('gaugeResult', gauge.toFixed(2));
-    } else {
-      setText('gaugeResult', '--');
+            // Show yarn info
+            const yarnBox = document.getElementById("yarn-info");
+            if (yarnBox) {
+                yarnBox.classList.remove("hidden");
+                const sizeName =
+                    btn.querySelector(".rc-size-name")?.textContent || "";
+                setText(
+                    "yarn-size-label",
+                    `尺码 ${sizeName} · 胸围 ${d.chest}cm`,
+                );
+                setText("yarn-bulky", d.yarnBulky || "--");
+                setText("yarn-worsted", d.yarnWorsted || "--");
+                setText("yarn-dk", d.yarnDk || "--");
+            }
+
+            calculateAll();
+        });
+    });
+
+    // Input listeners
+    document
+        .querySelectorAll(
+            "#swatchWidth, #neckCirc, #raglanLength, #bodyLength, #cuffCirc, #sleeveLength",
+        )
+        .forEach((input) => {
+            input.addEventListener("input", calculateAll);
+        });
+
+    function setText(id: string, v: string) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = v;
     }
 
-    if (gauge > 0 && neckCirc > 0) {
-      const totalNeck = Math.round(neckCirc * gauge);
-      const back = Math.round(totalNeck * 0.33);
-      const sleeve = Math.round(totalNeck * 0.25);
-      const front = totalNeck - back - sleeve * 2 - 8;
-      const lf = Math.round(front * 0.25);
-      const rf = Math.round(front * 0.25);
-      const cf = front - lf - rf;
+    function calculateAll() {
+        const val = (id: string) =>
+            parseFloat(
+                (document.getElementById(id) as HTMLInputElement)?.value,
+            ) || 0;
+        const swatchWidth = val("swatchWidth");
+        const neckCirc = val("neckCirc");
+        const cuffCirc = val("cuffCirc");
 
-      setText('totalNeck', String(totalNeck));
-      setText('backStitches', String(back));
-      setText('sleeveStitches', String(sleeve));
-      setText('frontStitches', String(front));
-      setText('leftFront', String(lf));
-      setText('centerFront', String(cf));
-      setText('rightFront', String(rf));
+        let gauge = 0;
+        if (swatchWidth > 0) {
+            gauge = 20 / swatchWidth;
+            setText("gaugeResult", gauge.toFixed(2));
+        } else {
+            setText("gaugeResult", "--");
+        }
 
-      const s1 = sleeve + 2, bk = back + 2, s2 = sleeve + 2;
-      setText('sleeve1CastOn', s1 + '针');
-      setText('backCastOn', bk + '针');
-      setText('sleeve2CastOn', s2 + '针');
-      setText('initialCastOn', String(1 + 1 + s1 + bk + s2 + 1 + 1));
-    } else {
-      ['totalNeck','backStitches','sleeveStitches','frontStitches','leftFront','centerFront','rightFront'].forEach(id => setText(id, '--'));
-      setText('sleeve1CastOn', '袖+2');
-      setText('backCastOn', '后片+2');
-      setText('sleeve2CastOn', '袖+2');
-      setText('initialCastOn', '--');
+        if (gauge > 0 && neckCirc > 0) {
+            const totalNeck = Math.round(neckCirc * gauge);
+            const back = Math.round(totalNeck * 0.33);
+            const sleeve = Math.round(totalNeck * 0.25);
+            const front = totalNeck - back - sleeve * 2 - 8;
+            const lf = Math.round(front * 0.25);
+            const rf = Math.round(front * 0.25);
+            const cf = front - lf - rf;
+
+            setText("totalNeck", String(totalNeck));
+            setText("backStitches", String(back));
+            setText("sleeveStitches", String(sleeve));
+            setText("frontStitches", String(front));
+            setText("leftFront", String(lf));
+            setText("centerFront", String(cf));
+            setText("rightFront", String(rf));
+
+            const s1 = sleeve + 2,
+                bk = back + 2,
+                s2 = sleeve + 2;
+            setText("sleeve1CastOn", s1 + "针");
+            setText("backCastOn", bk + "针");
+            setText("sleeve2CastOn", s2 + "针");
+            setText("initialCastOn", String(1 + 1 + s1 + bk + s2 + 1 + 1));
+        } else {
+            [
+                "totalNeck",
+                "backStitches",
+                "sleeveStitches",
+                "frontStitches",
+                "leftFront",
+                "centerFront",
+                "rightFront",
+            ].forEach((id) => setText(id, "--"));
+            setText("sleeve1CastOn", "袖+2");
+            setText("backCastOn", "后片+2");
+            setText("sleeve2CastOn", "袖+2");
+            setText("initialCastOn", "--");
+        }
+
+        setText(
+            "cuffStitches",
+            gauge > 0 && cuffCirc > 0
+                ? String(Math.round(cuffCirc * gauge))
+                : "--",
+        );
+        setText(
+            "underarmStitches",
+            gauge > 0 ? String(Math.round(gauge * 2.5)) : "--",
+        );
     }
-
-    setText('cuffStitches', gauge > 0 && cuffCirc > 0 ? String(Math.round(cuffCirc * gauge)) : '--');
-    setText('underarmStitches', gauge > 0 ? String(Math.round(gauge * 2.5)) : '--');
-  }
 </script>
