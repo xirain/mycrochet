@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧶 钩针编织笔记 · 环形起针</title>
+    <style>
+        /* ========== 全局重置 & 字体 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fdf6f0 0%, #f5e6d3 100%);
+            min-height: 100vh;
+            padding: 30px 16px 60px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* ========== 主容器 ========== */
+        .container {
+            max-width: 680px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* ========== 头部 ========== */
+        .header {
+            text-align: center;
+            padding: 28px 20px 20px;
+            margin-bottom: 28px;
+            background: rgba(255, 248, 242, 0.70);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            box-shadow: 0 8px 32px rgba(180, 130, 100, 0.12);
+            border: 1px solid rgba(255, 235, 220, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -60%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(232, 168, 124, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -10%;
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(212, 165, 116, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .header-icon {
+            font-size: 38px;
+            display: block;
+            margin-bottom: 4px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #4a3728;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 span {
+            color: #c4956a;
+        }
+
+        .header .sub {
+            font-size: 14px;
+            color: #b0886a;
+            margin-top: 6px;
+            letter-spacing: 2px;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .divider-line {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #d4a574, #e8a87c, #d4a574);
+            border-radius: 4px;
+            margin: 10px auto 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========== 统计徽章 ========== */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 14px;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+        }
+
+        .stats .badge {
+            background: rgba(212, 165, 116, 0.18);
+            padding: 4px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #6b4f3a;
+            font-weight: 500;
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            backdrop-filter: blur(4px);
+        }
+
+        .stats .badge strong {
+            color: #a06b4a;
+        }
+
+        /* ========== 卡片通用 ========== */
+        .round-card {
+            background: rgba(255, 252, 248, 0.85);
+            backdrop-filter: blur(4px);
+            border-radius: 20px;
+            padding: 18px 22px 18px 22px;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 16px rgba(160, 120, 90, 0.08);
+            border: 1px solid rgba(255, 235, 220, 0.5);
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+        }
+
+        .round-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(160, 120, 90, 0.12);
+        }
+
+        /* ========== 圈号 ========== */
+        .round-number {
+            flex-shrink: 0;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, #d4a574, #c4956a);
+            box-shadow: 0 4px 12px rgba(196, 149, 106, 0.30);
+            position: relative;
+            user-select: none;
+            transition: transform 0.2s ease;
+        }
+
+        .round-card:hover .round-number {
+            transform: scale(1.04);
+        }
+
+        .round-number .num {
+            font-size: 20px;
+            line-height: 1;
+            letter-spacing: 0.5px;
+        }
+
+        .round-number .label {
+            font-size: 8px;
+            font-weight: 500;
+            opacity: 0.75;
+            letter-spacing: 1px;
+            margin-top: 1px;
+        }
+
+        /* 不同阶段的圈号颜色 */
+        .round-card.stage-inc .round-number {
+            background: linear-gradient(135deg, #e8a87c, #d48c6a);
+        }
+
+        .round-card.stage-flat .round-number {
+            background: linear-gradient(135deg, #9bb8d4, #7a9fc4);
+        }
+
+        .round-card.stage-dec .round-number {
+            background: linear-gradient(135deg, #c49a8a, #b08070);
+        }
+
+        .round-card.stage-finish .round-number {
+            background: linear-gradient(135deg, #a8c4a0, #7ab08a);
+        }
+
+        /* ========== 内容区 ========== */
+        .round-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .round-desc {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #3d2e22;
+            font-weight: 450;
+            word-break: break-word;
+        }
+
+        /* 关键词高亮 */
+        .round-desc .highlight-sc {
+            color: #4a8a7a;
+            font-weight: 600;
+        }
+
+        .round-desc .highlight-inc {
+            color: #d48c6a;
+            font-weight: 600;
+        }
+
+        .round-desc .highlight-dec {
+            color: #b08070;
+            font-weight: 600;
+        }
+
+        .round-desc .highlight-group {
+            color: #8a7a6a;
+            font-weight: 500;
+            background: rgba(200, 180, 160, 0.15);
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+
+        .round-desc .highlight-num {
+            color: #a06b4a;
+            font-weight: 700;
+        }
+
+        .round-desc .bracket {
+            color: #8a7a6a;
+            font-weight: 400;
+        }
+
+        /* 范围标记（6-10圈） */
+        .round-desc .range-tag {
+            display: inline-block;
+            background: rgba(155, 184, 212, 0.18);
+            padding: 0 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #5a7a8a;
+            border: 1px solid rgba(155, 184, 212, 0.2);
+        }
+
+        /* ========== 针数标签 ========== */
+        .round-total {
+            flex-shrink: 0;
+            min-width: 48px;
+            text-align: center;
+            background: rgba(212, 165, 116, 0.12);
+            padding: 4px 12px;
+            border-radius: 30px;
+            border: 1px solid rgba(212, 165, 116, 0.15);
+            transition: background 0.2s ease;
+        }
+
+        .round-card:hover .round-total {
+            background: rgba(212, 165, 116, 0.20);
+        }
+
+        .round-total .count {
+            font-size: 18px;
+            font-weight: 700;
+            color: #6b4f3a;
+            line-height: 1.2;
+        }
+
+        .round-total .unit {
+            font-size: 10px;
+            color: #b0886a;
+            font-weight: 500;
+            display: block;
+            letter-spacing: 0.5px;
+            margin-top: -1px;
+        }
+
+        /* ========== 特殊：填充棉花 ========== */
+        .finish-card {
+            background: rgba(168, 196, 160, 0.15);
+            border: 2px dashed rgba(122, 176, 138, 0.35);
+            border-radius: 20px;
+            padding: 18px 22px;
+            margin-top: 20px;
+            text-align: center;
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .finish-card .icon {
+            font-size: 28px;
+        }
+
+        .finish-card .text {
+            font-size: 17px;
+            font-weight: 600;
+            color: #4a7a5a;
+            letter-spacing: 1px;
+        }
+
+        .finish-card .text small {
+            font-weight: 400;
+            font-size: 14px;
+            color: #6a9a7a;
+            margin-left: 6px;
+        }
+
+        /* ========== 页脚 ========== */
+        .footer {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 12px;
+            color: #c0a898;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        .footer span {
+            display: inline-block;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%,
+            100% {
+                opacity: 0.4;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 520px) {
+            body {
+                padding: 16px 10px 40px;
+            }
+
+            .header {
+                padding: 20px 14px 16px;
+                border-radius: 24px;
+            }
+
+            .header h1 {
+                font-size: 21px;
+            }
+
+            .header .sub {
+                font-size: 12px;
+            }
+
+            .stats .badge {
+                font-size: 11px;
+                padding: 3px 14px;
+            }
+
+            .round-card {
+                padding: 14px 14px 14px 14px;
+                gap: 12px;
+                border-radius: 16px;
+                margin-bottom: 10px;
+                flex-wrap: nowrap;
+            }
+
+            .round-number {
+                width: 44px;
+                height: 44px;
+                flex-shrink: 0;
+            }
+
+            .round-number .num {
+                font-size: 17px;
+            }
+
+            .round-number .label {
+                font-size: 7px;
+            }
+
+            .round-desc {
+                font-size: 13.5px;
+                line-height: 1.6;
+            }
+
+            .round-total {
+                min-width: 38px;
+                padding: 2px 10px;
+            }
+
+            .round-total .count {
+                font-size: 15px;
+            }
+
+            .round-total .unit {
+                font-size: 8px;
+            }
+
+            .finish-card {
+                padding: 14px 16px;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .finish-card .text {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .round-card {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .round-content {
+                flex: 1 1 100%;
+                order: 2;
+            }
+
+            .round-total {
+                order: 3;
+                flex: 0 0 auto;
+                margin-left: auto;
+            }
+
+            .round-number {
+                order: 1;
+            }
+        }
+
+        /* ========== 打印优化 ========== */
+        @media print {
+            body {
+                background: #fff;
+                padding: 20px;
+            }
+
+            .round-card {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #e0d0c0;
+                background: #fff;
+            }
+
+            .header {
+                box-shadow: none;
+                border: 1px solid #e0d0c0;
+                background: #faf5f0;
+            }
+
+            .round-card:hover {
+                transform: none;
+                box-shadow: none;
+            }
+
+            .finish-card {
+                border: 2px dashed #b0c8a8;
+                background: #f5faf0;
+            }
+        }
+
+        /* ========== 小装饰 ========== */
+        .round-card .deco-dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(212, 165, 116, 0.15);
+            top: 10px;
+            right: 14px;
+            pointer-events: none;
+        }
+
+        .round-card.stage-inc .deco-dot {
+            background: rgba(232, 168, 124, 0.20);
+        }
+
+        .round-card.stage-flat .deco-dot {
+            background: rgba(155, 184, 212, 0.20);
+        }
+
+        .round-card.stage-dec .deco-dot {
+            background: rgba(196, 154, 138, 0.20);
+        }
+
+        /* 圈数范围标记（6-10） */
+        .range-badge {
+            display: inline-block;
+            background: rgba(155, 184, 212, 0.12);
+            padding: 0 8px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #5a7a8a;
+            margin-left: 4px;
+            border: 1px solid rgba(155, 184, 212, 0.10);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ====== 头部 ====== -->
+        <header class="header">
+            <span class="header-icon">🧶</span>
+            <h1>钩针编织 · <span>环形起针</span></h1>
+            <p class="sub">— 自用笔记 · 逐圈详解 —</p>
+            <div class="divider-line"></div>
+            <div class="stats">
+                <span class="badge">🧵 总圈数 <strong>15</strong></span>
+                <span class="badge">📌 起针 <strong>7</strong> 针</span>
+                <span class="badge">📈 最大 <strong>35</strong> 针</span>
+            </div>
+        </header>
+
+        <!-- ====== 第1圈 ====== -->
+        <div class="round-card stage-inc">
+            <div class="round-number">
+                <span class="num">01</span>
+                <span class="label">圈</span>
+            </div>
+            <div class="round-content">
+                <div class="round-desc">
+                    <span class="highlight-sc">短针</span> × 7
+                </div>
+            </div>
+            <div class="round-total">
+                <span class="count">7</span>
+                <span class="unit">针</span>
+            </div>
+            <span class="deco-dot"></span>
+        </div>
+
+        <!-- ====== 第2圈 ====== -->
+        <div class="round-card stage-inc">
+            <div class="round-number">
+                <span class="num">02</span>
+                <span class="label">圈</span>
+            </div>
+            <div class="round-content">
+                <div class="round-desc">
+                    <span class="highlight-inc">加针</span> × 7
+                </div>
+            </div>
+            <div class="round-total">
+                <span class="count">14</span>
+                <span class="unit">针</span>
+            </div>
+            <span class="deco-dot"></span>
+        </div>
+
+        <!-- ====== 第3圈 ====== -->
+        <div class="round-card stage-inc">
+            <div class="round-number">
+                <span class="num">03</span>
+                <span class="label">圈</span>
+            </div>
+            <div class="round-content">
+                <div class="round-desc">
+                    <span class="highlight-group">7组</span>
+                    <span class="bracket">(</span>
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-inc">加针</span>
+                    <span class="bracket">)</span>
+                </div>
+            </div>
+            <div class="round-total">
+                <span class="count">21</span>
+                <span class="unit">针</span>
+            </div>
+            <span class="deco-dot"></span>
+        </div>
+
+        <!-- ====== 第4圈 ====== -->
+        <div class="round-card stage-inc">
+            <div class="round-number">
+                <span class="num">04</span>
+                <span class="label">圈</span>
+            </div>
+            <div class="round-content">
+                <div class="round-desc">
+                    <span class="highlight-group">7组</span>
+                    <span class="bracket">(</span>
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-inc">加针</span>
+                    <span class="bracket">)</span>
+                </div>
+            </div>
+            <div class="round-total">
+                <span class="count">28</span>
+                <span class="unit">针</span>
+            </div>
+            <span class="deco-dot"></span>
+        </div>
+
+        <!-- ====== 第5圈 ====== -->
+        <div class="round-card stage-inc">
+            <div class="round-number">
+                <span class="num">05</span>
+                <span class="label">圈</span>
+            </div>
+            <div class="round-content">
+                <div class="round-desc">
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-inc">加针</span>，
+                    <span class="highlight-group">6组</span>
+                    <span class="bracket">(</span>
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-inc">加针</span>
+                    <span class="bracket">)</span>，
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-sc">短针</span>
+                </div>
+            </div>
+            <div class="round-total">
+                <span class="count">35</span>
+                <span class="unit">针</span>
+            </div>
+            <span class="deco-dot"></span>
+        </div>
+
+        <!-- ====== 第6~10圈 ====== -->
+        <div class="round-card stage-flat">
+            <div class="round-number">
+                <span class="num">06</span>
+                <span class="label">~10</span>
+            </div>
+            <div class="round-content">
+                <div class="round-desc">
+                    <span class="range-tag">不加不减</span>
+                    <span class="highlight-sc">短针</span>
+                    <span class="range-badge">× 5圈</span>
+                </div>
+            </div>
+            <div class="round-total">
+                <span class="count">35</span>
+                <span class="unit">针</span>
+            </div>
+            <span class="deco-dot"></span>
+        </div>
+
+        <!-- ====== 第11圈 ====== -->
+        <div class="round-card stage-dec">
+            <div class="round-number">
+                <span class="num">11</span>
+                <span class="label">圈</span>
+            </div>
+            <div class="round-content">
+                <div class="round-desc">
+                    <span class="highlight-group">5组</span>
+                    <span class="bracket">(</span>
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-dec">减针</span>
+                    <span class="bracket">)</span>
+                </div>
+            </div>
+            <div class="round-total">
+                <span class="count">30</span>
+                <span class="unit">针</span>
+            </div>
+            <span class="deco-dot"></span>
+        </div>
+
+        <!-- ====== 第12圈 ====== -->
+        <div class="round-card stage-dec">
+            <div class="round-number">
+                <span class="num">12</span>
+                <span class="label">圈</span>
+            </div>
+            <div class="round-content">
+                <div class="round-desc">
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-dec">减针</span>，
+                    <span class="highlight-group">4组</span>
+                    <span class="bracket">(</span>
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-dec">减针</span>
+                    <span class="bracket">)</span>，
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-sc">短针</span>
+                </div>
+            </div>
+            <div class="round-total">
+                <span class="count">25</span>
+                <span class="unit">针</span>
+            </div>
+            <span class="deco-dot"></span>
+        </div>
+
+        <!-- ====== 第13圈 ====== -->
+        <div class="round-card stage-dec">
+            <div class="round-number">
+                <span class="num">13</span>
+                <span class="label">圈</span>
+            </div>
+            <div class="round-content">
+                <div class="round-desc">
+                    <span class="highlight-group">5组</span>
+                    <span class="bracket">(</span>
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-sc">短针</span>，
+                    <span class="highlight-dec">减针</span>
+                    <span class="bracket">)</span>
+                </div>
+            </div>
+            <div class="round-total">
+                <span class="count">20</span>
+                <span class="unit">针</span>
+            </div>
+            <span class="deco-dot"></span>
+        </div>
+
+        <!-- ====== 第14圈 ====== -->
+        <div class="round-card stage-dec">
+            <div class="round-number">
+                <span class="num">14</span>
+                <span class="label">圈</span>
+            </div>
+            <div class="round-content">
+                <div class="round-desc">
+                    <span class="highlight-dec">减针</span> × 10
+                </div>
+            </div>
+            <div class="round-total">
+                <span class="count">10</span>
+                <span class="unit">针</span>
+            </div>
+            <span class="deco-dot"></span>
+        </div>
+
+        <!-- ====== 第15圈 ====== -->
+        <div class="round-card stage-finish">
+            <div class="round-number">
+                <span class="num">15</span>
+                <span class="label">圈</span>
+            </div>
+            <div class="round-content">
+                <div class="round-desc">
+                    <span class="highlight-inc">加针</span> × 10
+                </div>
+            </div>
+            <div class="round-total">
+                <span class="count">20</span>
+                <span class="unit">针</span>
+            </div>
+            <span class="deco-dot"></span>
+        </div>
+
+        <!-- ====== 填充棉花 ====== -->
+        <div class="finish-card">
+            <span class="icon">🧵</span>
+            <span class="text">
+                填充棉花
+                <small>🎉 完成！</small>
+            </span>
+        </div>
+
+        <!-- ====== 页脚 ====== -->
+        <div class="footer">
+            <span>✦</span> 手工编织 · 自用笔记 <span>✦</span>
+        </div>
+
+    </div>
+
+</body>
+</html>
