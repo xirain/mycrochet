@@ -44,5 +44,29 @@ const posts = (await getCollection("posts", ({ data }) => !data.draft))
         )
       }
     </section>
+
+    <!-- 编织图解 -->
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold mb-6">🧶 编织图解</h2>
+      <a
+        href={`${import.meta.env.BASE_URL}/钩针小葫芦.html`}
+        class="block group rounded-xl border border-border bg-card p-6 card-hover"
+      >
+        <div class="flex items-center gap-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center text-2xl">
+            🧵
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors">
+              钩针小葫芦 · 环形起针图解
+            </h3>
+            <p class="text-sm text-muted-foreground mt-1">
+              15圈详细逐圈说明，从起针到填充棉花
+            </p>
+          </div>
+          <span class="ml-auto text-muted-foreground group-hover:text-primary transition-colors">&rarr;</span>
+        </div>
+      </a>
+    </section>
   </div>
 </BaseLayout>
