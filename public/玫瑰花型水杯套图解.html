@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌹 玫瑰花型水杯套图解</title>
+    <style>
+        /* ===== 基础重置 & 字体 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+            background: linear-gradient(145deg, #fce8ef 0%, #f7d6e3 100%);
+            min-height: 100vh;
+            padding: 30px 18px 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            color: #3d2a33;
+        }
+
+        /* ===== 主容器 ===== */
+        .container {
+            max-width: 820px;
+            width: 100%;
+            background: rgba(255, 248, 245, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 48px 48px 32px 32px;
+            box-shadow: 0 20px 60px rgba(180, 80, 110, 0.20), 0 6px 20px rgba(180, 80, 110, 0.10);
+            padding: 40px 38px 32px;
+            transition: all 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+        }
+
+        /* ===== 头部 ===== */
+        .header {
+            text-align: center;
+            padding-bottom: 22px;
+            border-bottom: 2px dashed #ecc0ce;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .header::after {
+            content: "🌹";
+            position: absolute;
+            bottom: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff8f5;
+            padding: 0 12px;
+            font-size: 26px;
+            line-height: 1;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #a0496a;
+            text-shadow: 0 2px 8px rgba(200, 100, 130, 0.15);
+            margin-bottom: 6px;
+        }
+
+        .header .author {
+            font-size: 18px;
+            font-weight: 500;
+            color: #b86a87;
+            background: linear-gradient(135deg, #fce4ed, #fad0df);
+            display: inline-block;
+            padding: 4px 22px;
+            border-radius: 40px;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+            box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.6);
+        }
+
+        .header .author span {
+            font-weight: 700;
+            color: #8f3d5c;
+        }
+
+        /* ===== 符号图例 ===== */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px 20px;
+            background: #fffbf9;
+            border-radius: 60px;
+            padding: 14px 28px;
+            margin-bottom: 30px;
+            border: 1px solid #f0dae3;
+            box-shadow: 0 2px 10px rgba(180, 80, 110, 0.06);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #4d3340;
+        }
+
+        .legend-item .sym {
+            display: inline-block;
+            font-weight: 700;
+            padding: 0 6px;
+            border-radius: 6px;
+            font-size: 16px;
+            letter-spacing: 0.3px;
+        }
+
+        .sym-x {
+            color: #2b7d5a;
+            background: #e6f5ef;
+        }
+        .sym-ch {
+            color: #2b6a9e;
+            background: #e3edf7;
+        }
+        .sym-k {
+            color: #b8702a;
+            background: #f5ede4;
+        }
+        .sym-sl {
+            color: #7a4f8a;
+            background: #f0e8f5;
+        }
+        .sym-v {
+            color: #b8435a;
+            background: #fce8ec;
+        }
+        .legend-item .desc {
+            color: #6a4e5a;
+            font-weight: 400;
+        }
+
+        /* ===== 步骤区域 ===== */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        /* ===== 分组卡片 ===== */
+        .group {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 20px 26px 22px;
+            box-shadow: 0 4px 16px rgba(180, 80, 110, 0.08);
+            border: 1px solid #f5e4ec;
+            transition: box-shadow 0.25s, transform 0.2s;
+        }
+
+        .group:hover {
+            box-shadow: 0 8px 28px rgba(180, 80, 110, 0.13);
+            transform: translateY(-2px);
+        }
+
+        .group-header {
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+
+        .group-header .label {
+            font-size: 18px;
+            font-weight: 700;
+            color: #a0496a;
+            background: #fce8f0;
+            padding: 2px 18px 2px 16px;
+            border-radius: 40px;
+            letter-spacing: 0.3px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .group-header .label .badge {
+            background: #d4729a;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 0 12px;
+            border-radius: 30px;
+            line-height: 22px;
+        }
+
+        .group-header .info {
+            font-size: 14px;
+            color: #9a7a86;
+            background: #f5edf0;
+            padding: 2px 16px;
+            border-radius: 30px;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        .group-header .info strong {
+            color: #7a4f62;
+            font-weight: 600;
+        }
+
+        /* ===== 单行 ===== */
+        .row {
+            display: flex;
+            align-items: baseline;
+            gap: 8px 16px;
+            padding: 8px 6px 8px 12px;
+            border-radius: 16px;
+            background: #fcf8fa;
+            margin-bottom: 4px;
+            flex-wrap: wrap;
+            transition: background 0.15s;
+            border-left: 3px solid transparent;
+        }
+
+        .row:last-child {
+            margin-bottom: 0;
+        }
+
+        .row:hover {
+            background: #faf2f6;
+        }
+
+        .row .num {
+            font-size: 14px;
+            font-weight: 600;
+            color: #b86a87;
+            min-width: 48px;
+            font-feature-settings: "tnum";
+            letter-spacing: 0.2px;
+        }
+
+        .row .num .sub {
+            font-weight: 400;
+            font-size: 12px;
+            color: #be8b9e;
+        }
+
+        .row .content {
+            font-size: 17px;
+            font-weight: 450;
+            color: #3d2a33;
+            line-height: 1.6;
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 2px 4px;
+        }
+
+        .row .content .hl {
+            font-weight: 600;
+            color: #a0496a;
+        }
+
+        .row .content .hl-x {
+            color: #2b7d5a;
+            font-weight: 700;
+        }
+        .row .content .hl-ch {
+            color: #2b6a9e;
+            font-weight: 700;
+        }
+        .row .content .hl-k {
+            color: #b8702a;
+            font-weight: 700;
+        }
+        .row .content .hl-sl {
+            color: #7a4f8a;
+            font-weight: 700;
+        }
+        .row .content .hl-v {
+            color: #b8435a;
+            font-weight: 700;
+        }
+        .row .content .hl-num {
+            color: #a0496a;
+            font-weight: 700;
+        }
+        .row .content .hl-repeat {
+            display: inline-block;
+            background: #f0dae3;
+            color: #7a4f62;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 0 10px;
+            border-radius: 30px;
+            line-height: 22px;
+            margin-left: 2px;
+        }
+
+        .row .content .text-muted {
+            color: #8f7680;
+            font-weight: 400;
+            font-size: 15px;
+        }
+
+        /* ===== 特殊行（第16-19行）样式 ===== */
+        .row-special {
+            background: #fdf6f9;
+            border-left-color: #d4729a;
+        }
+
+        .row-special .num {
+            color: #b8435a;
+        }
+
+        /* ===== 第1行特殊 ===== */
+        .row-first {
+            background: #f8f0f4;
+            border-left-color: #c28aa0;
+        }
+
+        .row-first .num {
+            color: #8f3d5c;
+        }
+
+        /* ===== 底部 ===== */
+        .footer {
+            margin-top: 32px;
+            padding-top: 22px;
+            border-top: 2px dashed #ecc0ce;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer .author-tag {
+            font-size: 16px;
+            font-weight: 500;
+            color: #b86a87;
+            background: #fce8f0;
+            padding: 4px 28px;
+            border-radius: 40px;
+            letter-spacing: 0.5px;
+            display: inline-block;
+        }
+
+        .footer .author-tag span {
+            font-weight: 700;
+            color: #8f3d5c;
+        }
+
+        .footer .hint {
+            font-size: 13px;
+            color: #b28a98;
+            letter-spacing: 0.3px;
+            margin-top: 2px;
+        }
+
+        .footer .hint span {
+            display: inline-block;
+            margin: 0 4px;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 600px) {
+            .container {
+                padding: 24px 16px 24px;
+                border-radius: 32px;
+            }
+
+            .header h1 {
+                font-size: 25px;
+                letter-spacing: 1px;
+            }
+
+            .header .author {
+                font-size: 16px;
+                padding: 3px 18px;
+            }
+
+            .legend {
+                padding: 12px 16px;
+                gap: 8px 14px;
+                border-radius: 40px;
+            }
+
+            .legend-item {
+                font-size: 13px;
+            }
+
+            .group {
+                padding: 16px 16px 18px;
+                border-radius: 22px;
+            }
+
+            .group-header .label {
+                font-size: 16px;
+                padding: 1px 14px;
+            }
+
+            .group-header .info {
+                font-size: 13px;
+                padding: 1px 12px;
+            }
+
+            .row {
+                padding: 6px 4px 6px 8px;
+                gap: 4px 10px;
+            }
+
+            .row .num {
+                font-size: 13px;
+                min-width: 40px;
+            }
+
+            .row .content {
+                font-size: 15px;
+            }
+
+            .row .content .hl-repeat {
+                font-size: 12px;
+                line-height: 20px;
+                padding: 0 8px;
+            }
+
+            .footer .author-tag {
+                font-size: 14px;
+                padding: 3px 20px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .container {
+                padding: 18px 10px 18px;
+                border-radius: 24px;
+            }
+
+            .header h1 {
+                font-size: 21px;
+            }
+
+            .row .content {
+                font-size: 14px;
+            }
+
+            .row .num {
+                font-size: 12px;
+                min-width: 34px;
+            }
+
+            .group {
+                padding: 14px 10px 16px;
+            }
+
+            .legend-item .desc {
+                font-size: 12px;
+            }
+        }
+
+        /* ===== 打印样式 ===== */
+        @media print {
+            body {
+                background: #fff;
+                padding: 20px 10px;
+            }
+
+            .container {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                background: #fff;
+                padding: 30px 28px;
+            }
+
+            .group:hover {
+                transform: none;
+                box-shadow: none;
+            }
+
+            .row:hover {
+                background: #fcf8fa;
+            }
+
+            .header::after {
+                background: #fff;
+            }
+
+            .legend {
+                border: 1px solid #ccc;
+                background: #fafafa;
+            }
+
+            .footer {
+                border-top-color: #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== 头部 ===== -->
+        <header class="header">
+            <h1>🌹 玫瑰花型水杯套图解</h1>
+            <div class="author">🧶 编织分享 · <span>@糖心蛋58</span></div>
+        </header>
+
+        <!-- ===== 符号图例 ===== -->
+        <div class="legend">
+            <span class="legend-item">
+                <span class="sym sym-x">X</span>
+                <span class="desc">短针</span>
+            </span>
+            <span class="legend-item">
+                <span class="sym sym-ch">ch</span>
+                <span class="desc">锁针</span>
+            </span>
+            <span class="legend-item">
+                <span class="sym sym-k">K</span>
+                <span class="desc">空针</span>
+            </span>
+            <span class="legend-item">
+                <span class="sym sym-sl">SL</span>
+                <span class="desc">引拔</span>
+            </span>
+            <span class="legend-item">
+                <span class="sym sym-v">V</span>
+                <span class="desc">加针</span>
+            </span>
+        </div>
+
+        <!-- ===== 步骤 ===== -->
+        <div class="steps">
+
+            <!-- ===== 第1行：起针 ===== -->
+            <div class="group">
+                <div class="group-header">
+                    <span class="label">🌸 起针</span>
+                </div>
+                <div class="row row-first">
+                    <span class="num">第1行</span>
+                    <span class="content">
+                        环起 <span class="hl-x">8X</span>
+                        <span class="text-muted">（环形起针，钩8个短针）</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- ===== 第2-15行：花瓣层 ===== -->
+            <!-- 第1层 -->
+            <div class="group">
+                <div class="group-header">
+                    <span class="label">🌷 第1层 <span class="badge">3ch</span></span>
+                    <span class="info">锁针链 · <strong>3</strong> 短针</span>
+                </div>
+                <div class="row">
+                    <span class="num">第2行</span>
+                    <span class="content">
+                        ( <span class="hl-x">X</span> , <span class="hl-ch">3ch</span> , <span class="hl-k">K1</span> ) <span class="hl-repeat">× 4</span>
+                    </span>
+                </div>
+                <div class="row">
+                    <span class="num">第3行</span>
+                    <span class="content">
+                        ( <span class="hl-v">V</span> , 锁针上钩 <span class="hl-x">3X</span> ) <span class="hl-repeat">× 4</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- 第2层 -->
+            <div class="group">
+                <div class="group-header">
+                    <span class="label">🌷 第2层 <span class="badge">7ch</span></span>
+                    <span class="info">锁针链 · <strong>7</strong> 短针</span>
+                </div>
+                <div class="row">
+                    <span class="num">第4行</span>
+                    <span class="content">
+                        <span class="hl-sl">2SL</span> , ( <span class="hl-x">2X</span> , <span class="hl-ch">7ch</span> , <span class="hl-k">K3</span> ) <span class="hl-repeat">× 4</span>
+                    </span>
+                </div>
+                <div class="row">
+                    <span class="num">第5行</span>
+                    <span class="content">
+                        ( <span class="hl-x">2X</span> , 锁针上钩 <span class="hl-x">7X</span> ) <span class="hl-repeat">× 4</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- 第3层 -->
+            <div class="group">
+                <div class="group-header">
+                    <span class="label">🌷 第3层 <span class="badge">9ch</span></span>
+                    <span class="info">锁针链 · <strong>9</strong> 短针</span>
+                </div>
+                <div class="row">
+                    <span class="num">第6行</span>
+                    <span class="content">
+                        <span class="hl-sl">5SL</span> , ( <span class="hl-x">2X</span> , <span class="hl-ch">9ch</span> , <span class="hl-k">K7</span> ) <span class="hl-repeat">× 4</span>
+                    </span>
+                </div>
+                <div class="row">
+                    <span class="num">第7行</span>
+                    <span class="content">
+                        ( <span class="hl-x">2X</span> , 锁针上钩 <span class="hl-x">9X</span> ) <span class="hl-repeat">× 4</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- 第4层 -->
+            <div class="group">
+                <div class="group-header">
+                    <span class="label">🌷 第4层 <span class="badge">13ch</span></span>
+                    <span class="info">锁针链 · <strong>13</strong> 短针</span>
+                </div>
+                <div class="row">
+                    <span class="num">第8行</span>
+                    <span class="content">
+                        <span class="hl-sl">5SL</span> , ( <span class="hl-x">2X</span> , <span class="hl-ch">13ch</span> , <span class="hl-k">K9</span> ) <span class="hl-repeat">× 4</span>
+                    </span>
+                </div>
+                <div class="row">
+                    <span class="num">第9行</span>
+                    <span class="content">
+                        ( <span class="hl-x">2X</span> , 锁针上钩 <span class="hl-x">13X</span> ) <span class="hl-repeat">× 4</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- 第5层 -->
+            <div class="group">
+                <div class="group-header">
+                    <span class="label">🌷 第5层 <span class="badge">17ch</span></span>
+                    <span class="info">锁针链 · <strong>17</strong> 短针</span>
+                </div>
+                <div class="row">
+                    <span class="num">第10行</span>
+                    <span class="content">
+                        <span class="hl-sl">7SL</span> , ( <span class="hl-x">2X</span> , <span class="hl-ch">17ch</span> , <span class="hl-k">K13</span> ) <span class="hl-repeat">× 4</span>
+                    </span>
+                </div>
+                <div class="row">
+                    <span class="num">第11行</span>
+                    <span class="content">
+                        ( <span class="hl-x">2X</span> , 锁针上钩 <span class="hl-x">17X</span> ) <span class="hl-repeat">× 4</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- 第6层 -->
+            <div class="group">
+                <div class="group-header">
+                    <span class="label">🌷 第6层 <span class="badge">23ch</span></span>
+                    <span class="info">锁针链 · <strong>23</strong> 短针</span>
+                </div>
+                <div class="row">
+                    <span class="num">第12行</span>
+                    <span class="content">
+                        <span class="hl-sl">9SL</span> , ( <span class="hl-x">2X</span> , <span class="hl-ch">23ch</span> , <span class="hl-k">K17</span> ) <span class="hl-repeat">× 4</span>
+                    </span>
+                </div>
+                <div class="row">
+                    <span class="num">第13行</span>
+                    <span class="content">
+                        ( <span class="hl-x">2X</span> , 锁针上钩 <span class="hl-x">23X</span> ) <span class="hl-repeat">× 4</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- 第7层 -->
+            <div class="group">
+                <div class="group-header">
+                    <span class="label">🌷 第7层 <span class="badge">31ch</span></span>
+                    <span class="info">锁针链 · <strong>31</strong> 短针</span>
+                </div>
+                <div class="row">
+                    <span class="num">第14行</span>
+                    <span class="content">
+                        <span class="hl-sl">11SL</span> , ( <span class="hl-x">2X</span> , <span class="hl-ch">31ch</span> , <span class="hl-k">K23</span> ) <span class="hl-repeat">× 4</span>
+                    </span>
+                </div>
+                <div class="row">
+                    <span class="num">第15行</span>
+                    <span class="content">
+                        ( <span class="hl-x">2X</span> , 锁针上钩 <span class="hl-x">31X</span> ) <span class="hl-repeat">× 4</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- ===== 第16-19行：花瓣边缘收尾 ===== -->
+            <div class="group">
+                <div class="group-header">
+                    <span class="label">🌹 花瓣边缘收尾</span>
+                    <span class="info">花边 · <strong>40ch</strong> 弧</span>
+                </div>
+                <div class="row row-special">
+                    <span class="num">第16行</span>
+                    <span class="content">
+                        <span class="hl-sl">17SL</span> , <span class="hl-x">X</span> , <span class="hl-ch">40ch</span> , <span class="hl-k">K32</span> , <span class="hl-x">X</span>
+                    </span>
+                </div>
+                <div class="row row-special">
+                    <span class="num">第17行</span>
+                    <span class="content">
+                        <span class="hl-ch">ch</span> , 翻转 , <span class="hl-x">X</span> , 锁针上钩 <span class="hl-x">40X</span> , <span class="hl-x">X</span> , <span class="text-muted">段线</span>
+                    </span>
+                </div>
+                <div class="row row-special">
+                    <span class="num">第18行</span>
+                    <span class="content">
+                        <span class="text-muted">花瓣中间位置起针</span> , <span class="hl-x">X</span> , <span class="hl-ch">40ch</span> , <span class="hl-k">K32</span> , <span class="hl-x">X</span>
+                    </span>
+                </div>
+                <div class="row row-special">
+                    <span class="num">第19行</span>
+                    <span class="content">
+                        <span class="hl-ch">ch</span> , 翻转 , <span class="hl-x">X</span> , 锁针上钩 <span class="hl-x">40X</span> , <span class="hl-x">X</span> , <span class="text-muted">段线</span>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ===== 底部 ===== -->
+        <footer class="footer">
+            <div class="author-tag">🧵 图解作者 · <span>@糖心蛋58</span></div>
+            <div class="hint">
+                <span>🌹</span> 每层花瓣锁针数递增，形成自然玫瑰花型 <span>🌹</span>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

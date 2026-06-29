@@ -67,6 +67,27 @@ const posts = (await getCollection("posts", ({ data }) => !data.draft))
           <span class="ml-auto text-muted-foreground group-hover:text-primary transition-colors">&rarr;</span>
         </div>
       </a>
+
+      <!-- 水杯套 -->
+      <a
+        href={`${import.meta.env.BASE_URL}/玫瑰花型水杯套图解.html`}
+        class="block group rounded-xl border border-border bg-card p-6 card-hover"
+      >
+        <div class="flex items-center gap-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-rose-100 to-rose-200 flex items-center justify-center text-2xl">
+            🌹
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors">
+              玫瑰花型水杯套图解 · @糖心蛋58
+            </h3>
+            <p class="text-sm text-muted-foreground mt-1">
+              19行锁针花瓣层层递增，附完整符号说明
+            </p>
+          </div>
+          <span class="ml-auto text-muted-foreground group-hover:text-primary transition-colors">&rarr;</span>
+        </div>
+      </a>
     </section>
   </div>
 </BaseLayout>
