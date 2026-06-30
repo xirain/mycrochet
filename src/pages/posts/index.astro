@@ -67,5 +67,32 @@ const posts = (await getCollection("posts", ({ data }) => !data.draft))
         </div>
       </a>
     </section>
+
+    <!-- 深度分析 -->
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold mb-6">📊 深度分析</h2>
+      <div class="relative rounded-xl border border-amber-200 bg-amber-50/50 p-4 mb-4 text-sm text-amber-800">
+        ⚠️ AI 生成分析，可能存在事实偏差，请注意甄别
+      </div>
+      <a
+        href={`${import.meta.env.BASE_URL}/圈里圈外141期分析.html`}
+        class="block group rounded-xl border border-border bg-card p-6 card-hover"
+      >
+        <div class="flex items-center gap-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-indigo-100 to-purple-200 flex items-center justify-center text-2xl">
+            🎙️
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors">
+              圈里圈外第141期 · 南北AI大会深度分析
+            </h3>
+            <p class="text-sm text-muted-foreground mt-1">
+              金融 · 政治 · 经济 · 军事多维度解读，AI生成报告
+            </p>
+          </div>
+          <span class="ml-auto text-muted-foreground group-hover:text-primary transition-colors">&rarr;</span>
+        </div>
+      </a>
+    </section>
   </div>
 </BaseLayout>

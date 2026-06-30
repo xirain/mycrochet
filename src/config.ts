@@ -1,7 +1,7 @@
 export const SITE = {
   website: "https://xirain.github.io/mycrochet/",
   author: "xirain",
-  desc: "钩针图解翻译教程 - AI 识别多语言钩针图解，翻译成中文简明教程",
+  desc: "🧶 钩针图解教程 · AI 识别多语言钩针图解翻译，含播客深度分析，内容由 AI 辅助生成",
   title: "My Crochet",
   lightAndDarkMode: true,
   postPerPage: 10,
